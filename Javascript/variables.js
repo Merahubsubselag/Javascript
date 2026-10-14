@@ -6,11 +6,11 @@ rahulcity='chd'
 let country;
 time='56'
 
-
-
-
-
 //console.table([time,Time,name])
+console.log(typeof null,typeof undefined, country, time, rahulcity)
+
+console.log(typeof null,typeof undefined, country, time, rahulcity)
+
 console.log(typeof null,typeof undefined, country, time, rahulcity)
 
 
