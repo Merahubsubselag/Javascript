@@ -1,0 +1,120 @@
+======================================================================
+                  JAVASCRIPT ERRORS LIST & PRACTICE CODE
+======================================================================
+
+----------------------------------------------------------------------
+1. SYNTAX ERROR (Likhne ki Galti / Grammar Mistake)
+----------------------------------------------------------------------
+Kue aata hai: Jab aap JavaScript ke grammar rules todte hain (jaise brackets, commas, ya quotes bhool jana).
+
+[❌ BUGGY CODE - Run to see SyntaxError]:
+let userAge = 18;
+if (userAge >= 18 {
+    console.log("You can vote");
+}
+
+[✅ CORRECTED CODE]:
+let userAge = 18;
+if (userAge >= 18) {
+    console.log("You can vote");
+}
+
+
+----------------------------------------------------------------------
+2. REFERENCE ERROR (Pehchan ki Galti / Name Not Found)
+----------------------------------------------------------------------
+Kue aata hai: Jab aap kisi aise variable ya function ka naam use karte hain jo aapne banaya hi nahi hai (ya spelling galat likhi hai).
+
+[❌ BUGGY CODE - Run to see ReferenceError]:
+let points = 50;
+console.log(point); 
+
+[✅ CORRECTED CODE]:
+let points = 50;
+console.log(points);
+
+
+----------------------------------------------------------------------
+3. TYPE ERROR (Galat Data Type Par Kam Karna)
+----------------------------------------------------------------------
+Kue aata hai: Jab variable toh sahi hai, par aap usse aisa kaam karwa rahe ho jo uska data type allow nahi karta (jaise const ko badalna).
+
+[❌ BUGGY CODE - Run to see TypeError]:
+const country = "India";
+country = "USA";
+
+[✅ CORRECTED CODE]:
+let country = "India";
+country = "USA";
+
+Ek normal String (text) ko Function ki tarah chalana ❌
+
+let message = "Hello World";
+
+// ❌ Galti: String ko function ki tarah run kar rahe hain
+message(); 
+// 🛑 TypeError: message is not a function
+
+ Ek Number ke sath String wale methods use karna ❌
+
+let myAge = 25;
+
+// ❌ Galti: Number ko uppercase karne ki koshish
+myAge.toUpperCase(); 
+// 🛑 TypeError: myAge.toUpperCase is not a function
+
+
+Khali/Gayab (Null ya Undefined) cheez ke andar ghusna 
+
+let userProfile; // Isme abhi kuch nahi hai (undefined hai)
+
+// ❌ Galti: Undefined variable ke andar se 'email' nikalne ki koshish
+console.log(userProfile.email); 
+// 🛑 TypeError: Cannot read properties of undefined (reading 'email')
+
+
+
+----------------------------------------------------------------------
+4. RANGE ERROR (Limit Se Bahar Ki Galti)
+----------------------------------------------------------------------
+Kue aata hai: Jab aap kisi value ya number ko uski taye shuda limit (range) se bahar lekar jaate hain.
+
+[❌ BUGGY CODE - Run to see RangeError]:
+let myNewArray = new Array(-10);
+
+[✅ CORRECTED CODE]:
+let myNewArray = new Array(10);
+
+
+----------------------------------------------------------------------
+5. INTERNAL ERROR / STACK OVERFLOW (Memory Full Error)
+----------------------------------------------------------------------
+Kue aata hai: Jab aapka code kisi loop ya function mai bina ruke chalta chala jata hai aur computer ki memory full ho jati hai.
+
+[❌ BUGGY CODE - Run to see InternalError / Call Stack Exceeded]:
+function sayHello() {
+    sayHello();
+}
+sayHello();
+
+[✅ CORRECTED CODE]:
+function sayHello() {
+    console.log("Hello");
+}
+sayHello(); // Sirf ek baar chalega
+
+
+======================================================================
+               🚀 FINAL CHALLENGE (Find 2 Errors)
+======================================================================
+Niche diye gaye code ko copy karke console mai run kijiye. 
+Isme do alag-alag errors hain. Pehle error ko theek kijiye, fir dusra error samne aayega!
+
+
+======================================================================
+let stock = 10;
+const itemPrice = 100;
+
+itemPrice = 120; 
+
+consol.log(itemPrice * Stock);
