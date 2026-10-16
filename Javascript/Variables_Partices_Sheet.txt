@@ -1,0 +1,260 @@
+=============================================================
+   JAVASCRIPT: VAR, LET, CONST - INTERVIEW QUESTION BANK
+=============================================================
+
+--- [QUESTION 1: Hoisting & Temporal Dead Zone (TDZ)] ---
+console.log(a);
+console.log(b);
+
+var a = 10;
+let b = 20;
+
+--- [QUESTION 2: Block Scope vs Function Scope] ---
+let x = 10;
+var y = 20;
+
+if (true) {
+  let x = 30;
+  var y = 40;
+}
+
+console.log(x);
+console.log(y);
+
+--- [QUESTION 3: Re-declaration & Re-assignment] ---
+var a = 1;
+var a = 2; // Line 2
+
+let b = 3;
+let b = 4; // Line 5
+
+const c = 5;
+c = 6;     // Line 8
+
+
+--- [QUESTION 4: Initialization Rule (Missing Value)] ---
+let p;
+p = 10;
+
+const q;
+q = 20;
+
+--- [QUESTION 5: Valid Shadowing] ---
+var score = 50;
+
+{
+  let score = 100;
+  console.log("Block:", score);
+}
+
+console.log("Global:", score);
+
+--- [QUESTION 6: Illegal Shadowing] ---
+let count = 10;
+
+{
+  var count = 20;
+  console.log("Inside:", count);
+}
+
+console.log("Outside:", count);
+
+--- [QUESTION 7: Window / Global Object Attachment] ---
+var greeting = "Namaste";
+let farewell = "Alvida";
+
+console.log(window.greeting);
+console.log(window.farewell);
+
+--- [QUESTION 8: Object Mutation with Const] ---
+const user = {
+  name: "Amit"
+};
+
+user.name = "Rahul";
+console.log(user.name);
+
+--- [QUESTION 9: Array Mutation with Const] ---
+const numbers = [10, 20, 30];
+
+numbers.push(40);
+numbers[0] = 99;
+
+console.log(numbers);
+
+--- [QUESTION 10: TDZ Right-Hand Trap] ---
+let x = x + 10;
+console.log(x);
+
+--- [QUESTION 11: Nested Blocks Scoping] ---
+let a = 5;
+
+{
+  let a = 15;
+  {
+    let a = 25;
+    console.log("Inner:", a);
+  }
+  console.log("Middle:", a);
+}
+
+console.log("Outer:", a);
+
+--- [QUESTION 12: Scope Chain Fallback] ---
+let a = 50;
+
+{
+  console.log("Inside:", a);
+}
+
+console.log("Outside:", a);
+
+--- [QUESTION 13: Inner Block TDZ Trap] ---
+let score = 100;
+
+{
+  console.log(score);
+  let score = 200;
+}
+
+--- [QUESTION 14: Direct Assignment (No Keyword)] ---
+name = "Rahul";
+console.log(name);
+
+--- [QUESTION 15: Mixed Scoping & Lifetime] ---
+var a = 10;
+let b = 20;
+
+{
+  var a = 100;
+  let b = 200;
+  const c = 300;
+}
+
+console.log(a);
+console.log(b);
+console.log(c);
+
+
+OUTPUT
+1) Output:
+- undefined
+- ReferenceError: Cannot access 'b' before initialization
+Reason:
+var hoist hokar memory mein 'undefined' se initialize ho jata hai.
+let hoist to hota hai par Temporal Dead Zone (TDZ) mein rehta hai jab tak uski line execute na ho.
+
+2)
+
+
+Output:
+- 10
+- 40
+Reason:
+let block-scoped hai, isliye andar wala { x = 30 } bahar asar nahi dalta.
+var block scope nahi manta, isliye andar wale y = 40 ne bahar wale y ko overwrite kar diya.
+
+3)
+
+Output:
+- Line 2: Chalegi (var re-declare ho sakta hai)
+- Line 5: SyntaxError: Identifier 'b' has already been declared
+- Line 8: TypeError: Assignment to constant variable
+Reason:
+let ko same scope mein dubara declare nahi kar sakte.
+const ki value ko dubara re-assign nahi kar sakte.
+
+4)
+
+Output:
+- let p; bilkul chalega (default undefined)
+- const q; par aayega: SyntaxError: Missing initializer in const declaration
+Reason:
+const banate waqt hi use value dena compulsory hota hai, varna code run hone se pehle hi SyntaxError de deta hai.
+
+5)
+
+Output:
+- Block: 100
+- Global: 50
+Reason:
+Block ke andar let apne bahar wale var score ko shadow (chupa) leta hai, par bahar wale ki value change nahi karta.
+
+6)
+
+Output:
+- SyntaxError: Identifier 'count' has already been declared
+Reason:
+Outer scope mein let maujood ho to block ke andar usi naam ka var nahi bana sakte, kyunki var block se bahar nikal kar let se takra jata hai.
+
+7)
+
+Output:
+- "Namaste"
+- undefined
+Reason:
+Global scope mein bana var window object par attach ho jata hai, par let aur const window par attach nahi hote.
+
+8)
+
+Output:
+- "Rahul"
+Reason:
+const variable ke reference (memory address) ko lock karta hai, object ke andar ki properties/values ko badalne ki poori permission hoti hai.
+
+9)
+
+Output:
+- [99, 20, 30, 40]
+Reason:
+Array reference type hota hai. Push karne ya index se value badalne par array ka reference change nahi hota, isliye const allow karta hai.
+
+10)
+
+Output:
+- ReferenceError: Cannot access 'x' before initialization
+Reason:
+Right-hand side (x + 10) calculate karte waqt JS x ko dhoondhta hai, par x abhi initialize nahi hua hota aur TDZ mein hota hai.
+
+11)
+
+Output:
+- Inner: 25
+- Middle: 15
+- Outer: 5
+Reason:
+Har { ... } apna alag block banata hai. Same naam ka let alag-alag blocks mein declare kiya ja sakta hai bina kisi error ke.
+
+12)
+
+Output:
+- Inside: 50
+- Outside: 50
+Reason:
+Jab block ke andar apna variable nahi milta, to JS engine parent (bahar wale) scope se value uthata hai (Scope Chain).
+
+13)
+
+Output:
+- ReferenceError: Cannot access 'score' before initialization
+Reason:
+Block ke andar apna let score declare hone ki wajah se poora block TDZ ban gaya. Engine bahar wale 100 ko access nahi karne deta.
+
+14)
+
+Output:
+- "Rahul"
+Reason:
+Bina var, let, ya const ke value assign karne par JS automatically global scope (window object) par variable bana deta hai.
+
+15)
+
+Output:
+- a: 100
+- b: 20
+- c: ReferenceError: c is not defined
+Reason:
+var block se bahar leak hokar overwrite kar deta hai (100).
+let bahar wala safe rehta hai (20).
+const block khatam hote hi memory se delete ho jata hai, isliye bahar c is not defined aata hai.
+=============================================================
