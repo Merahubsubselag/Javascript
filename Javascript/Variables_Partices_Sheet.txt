@@ -258,3 +258,19 @@ var block se bahar leak hokar overwrite kar deta hai (100).
 let bahar wala safe rehta hai (20).
 const block khatam hote hi memory se delete ho jata hai, isliye bahar c is not defined aata hai.
 =============================================================
+
+special
+
+ var x = 1; 
+function test() 
+{ 
+  console.log(x);
+  var x = 2;
+} 
+
+test();
+
+function mai jab var hota hai to js sabi var ko ek side rakhta hai or ese mai vo bus var name leke jata hai data ko nhi becuse
+Lekin JS banane wale (Brendan Eich) ne ek alag soch ke sath ise design kiya tha. Aise samjho ki computer ke dimaag mein do alag-alag kaam hote hain:
+1. Jagaah rokna (Memory Allocation): Jab computer code ko padhta hai, toh woh sirf itna dekhta hai ki use memory mein kitne dibbe (variables) banane hain. var x dekhte hi woh ek dibba bana deta hai.
+2. Samaan dalna (Execution): Dibbe ke andar value (2) dalne ka kaam tabhi hota hai jab computer sach mein us line par pahunchta hai.

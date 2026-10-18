@@ -1,0 +1,111 @@
+• Rank 18 — Grouping: ( ) (Parentheses)
+• Rank 17 — Member Access / Calls: ., [ ], new, fn()
+• Rank 16 — Postfix Increment / Decrement: ++, -- (Variable ke baad lagne wale)
+• Rank 15 — Prefix Increment / Decrement / Unary: ++, -- (Pehle lagne wale), !, ~, +, -, typeof, void, delete, await
+• Rank 14 — Exponentiation: ** (Power)
+• Rank 13 — Multiplication / Division: *, /, %
+• Rank 12 — Addition / Subtraction: +, -
+• Rank 11 — Bitwise Shift: <<, >>, >>>
+• Rank 10 — Relational / Comparison: <, <=, >, >=, in, instanceof (Jo hum discuss kar rahe the)
+• Rank 9 — Equality: ==, !=, ===, !==
+• Rank 8 — Bitwise AND: &
+• Rank 7 — Bitwise XOR: ^
+• Rank 6 — Bitwise OR: |
+• Rank 5 — Logical AND: &&
+• Rank 4 — Logical OR / Nullish Coalescing: ||, ??
+• Rank 3 — Conditional (Ternary): ? :
+• Rank 2 — Assignment: =, +=, -=, *=, /=, %=, **=, <<=, >>=, >>>=, &=, ^=, |=, &&=, ||=, ??=
+• Rank 1 — Comma: ,
+Agar aap chaho toh hum is list ka use karke ek ajeeb sa code test kar sakte hain, taaki pata chale ki aapko yeh priority rule samajh aaya ya nahi. Kya hum ek mini-quiz karein?
+
+
+
+
+
+
+QUICK REVISION NOTES yhe questions aaye jab function and class ke memory ke pripry ke baat hui -- phele kes ko mele ge 
+
+class mai es hota hai ke apne function ko call karo ge like class ka constructor()
+ ho yha class mai ek function bna kar dusra call kara hai tab to chal jea ga object bna kar 
+ agar bhar ka function call kiya dirct class mai tab fat jaye ge calss becuse ous time class ban rahi hoti hai
+  .. but class ka object jab banta hai tab koi propty nhi hoti class ke var function ke becuse sub ek propity 
+  hoti hai class ke jo same name ka hai do hai ex function and var same hai to ko last mai hoga vo pehele mel
+jea ga obejct ko: ex
+
+
+class MyClass {
+  // 1. Class ka apna function (Method)
+  foo() {
+    console.log("Main class ka function hoon!");
+  }
+
+  constructor() {
+    // 2. Tumne object bante waqt usi naam ka ek normal variable/property bana diya!
+    this.foo = "Main ek normal string hoon!"; 
+  }
+}
+
+const obj = new MyClass();
+console.log(obj.foo); // 👈 Output: "Main ek normal string hoon!"
+// obj.foo(); // ❌ CRASH! TypeError: obj.foo is not a function
+
+---- ese chal jagega:----
+
+// Outer Class (Bahar wali)
+class Foo {
+  constructor() {
+    console.log("Outer Foo chala!");
+  }
+
+  test() {
+    // Inner Class (Andar wali) - Naam ekdum SAME hai!
+    class Foo {
+      constructor() {
+        console.log("Inner Foo chala!");
+      }
+    }
+
+    // ⚡ Ab agar main function ke andar 'new Foo()' karunga toh kaun sa chalega?
+    const innerObj = new Foo(); 
+  }
+}
+
+const outerObj = new Foo(); // ➔ Output: "Outer Foo chala!"
+outerObj.test();            // ➔ Output: "Inner Foo chala!"
+
+
+Q16. Notepad mein copy kaise karein?
+-> Mouse se text select karo, Ctrl+C se copy karo, Notepad khol kar Ctrl+V se paste karo.
+
+Q17. Class se zyada izzat function ko milti hai?
+-> Haan! Compile time par function (Rank 2) pehle memory leta hai, class (Rank 3) baad mein. Function bina declare hue bhi chal jata hai, par class banti nahi toh crash ho jati hai.
+
+Q18. Agar function ke andar se class call ho toh kya class pehle hui?
+-> Nahi, priority wahi rahegii. Bas function ke andar ka code tab tak soya rehta hai jab tak tum use call nahi karte, isiliye code fatta nahi hai.
+
+Q19. Agar class ke andar hi bahar wala function call ho toh?
+-> Agar class bante waqt (inline field mein) call kiya toh Error ❌. Agar class ke kisi method/constructor ke andar call kiya toh Safe ✅.
+
+Q20. Agar class ke andar hi apna function bana kar call karein toh?
+-> Bante waqt inline call kiya toh Error ❌ (Object taiyar nahi hota). Constructor ya method ke andar call kiya toh Safe ✅.
+
+Q21. Constructor ke time bhi toh class ban rahi hoti hai, tab kyun nahi fati?
+-> Kyunki constructor chalne se PEHLE hi JS class ka poora dhaanchan (structure) memory mein active kar chuka hota hai.
+
+Q22. Par class pehle memory legi aur constructor baad mein na?
+-> Nahi! Class aur uske andar ke saare functions (including constructor) ko memory ek saath, ek hi time par milti hai.
+
+Q23. Jab class ka ek function doosre ko call kare toh kyun nahi fatti?
+-> Kyunki dono function ek hi ghar (Prototype) ke hain aur dono bante waqt nahi chalte, balki object banne ke BAAD (jab sab ready ho) tab chalte hain.
+
+Q24. Mtlb class ke function se class nahi fategi, par bahar wale se fat jayegi?
+-> Ekdum sahi! Class ke bante waqt inline kuch bhi forcefully call karoge toh fategi. Par function/method ke andar daal doge toh soya rahega aur safe rahega.
+
+Q25. Toh end mein class ko pehle memory mili ya function ko?
+-> FUNCTION ko hamesha pehle memory milti hai (Rank 2) aur CLASS ko baad mein (Rank 3).
+
+Q26. Class mein function declare hai toh object banne se pehle call hi nahi hoga na?
+-> 100% Sahi! Function tabhi jagega jab object banega. Inline wale case mein tum object banne se pehle hi chalne ko bol rahe the, isliye fata tha.
+
+Q27. Object banne par bhi kya same name par function ko pehle memory milti hai? Aur inner class ka kya?
+-> Run-time (object banne) par rule badal jata hai! Same name par variable/property jeet jaati hai aur function ko override kar deti hai. Aur inner class mein JS hamesha local scope (paas wale) ko pehle uthata hai.

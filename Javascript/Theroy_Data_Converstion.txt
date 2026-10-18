@@ -1,0 +1,67 @@
+Type Conversion ka seedha matlab hota hai ek type ke data ko doosre type mein change karna.
+For example :-  text/string ko number mein badalna, ya kisi number ko string mein badalna.
+
+
+Convert karne ke 2 main types hote hain:
+
+Implicit Conversion (Automatic)
+Explicit Conversion (Manual)
+
+1) Implicit Conversion :-  Yeh conversion JavaScript engine khud-b-khud (automatically) background mein kar deta hai that is called Type Coercion.
+
+String Conversion (Plus + Operator)
+
+String Conversion (Plus + Operator): Agar aap kisi string ke saath + use karenge, 
+toh JS doosre data ko bhi string bana dega aur dono ko aapas mein chipka (concat) dega.
+
+1)"5" + 2;     // Output: "52" (number 2 string ban gaya)
+2)"hi" + true; // Output: "hitrue"
+
+
+2) Numeric Conversion (-, *, / Operators): Baaki math operations mein JS string ko number mein badal deta hai.
+
+1) "10" - 2;   // Output: 8 (string "10" number ban gaya)
+2) "4" * "3";  // Output: 12
+
+2)Explicit Conversion (Manual) :-  Yeh conversion developer (yani aap) khud code likhkar jaan-boojhkar karwata hai.
+ Jab aapko engine par bharosa na ho aur paka chahiye ki data sahi type mein rahe, tab aap built-in functions use karte hain.
+
+Number mein badalna: Iske liye
+
+Number():-pure string ko check karta hai. Agar string mein ek bhi character text (alphabet) mil gaya,
+ toh woh haath khade kar deta hai aur NaN (Not a Number) return karta hai.
+
+parseInt(): - text mein se number ko nikaal (extract kar) leta hai. 
+Yeh string ko left to right scan karta hai, jahan tak number milte hain unhe le leta hai, 
+aur jaise hi pehla text character milta hai, wahin ruk jata hai.
+
+parseFloat() :- Agar aapke paas koi measurement ya price string mein hai jisme point (.) laga hai, toh parseInt() use kharab kar deta hai.
+
+parseFloat("12.5px");    // Output: 12.5 (px par ruk gaya)
+parseFloat("88.7px8.9"); // Output: 88.7 (px par ruk gaya, aage nahi dekha)
+
+
+
+String mein badalna: Iske liye
+
+Agar aapka data kabhi khali (null ya undefined)
+aa jaye—jo ki APIs mein bohot common hai—toh dono alag tareeqe se behave karte hain:
+
+ String() :- ekdum safe hai.and  ek Global Function hai. and Isme aap value ko bracket ke andar pass karte ho
+
+String(null);      // Output: "null"
+String(undefined)
+
+ toString():
+ need value"- 
+ toString() par error aa jata hai. Yeh null aur undefined
+ laga kar variable ke upar call kiya jata hai (value.toString()).
+ 
+ let data = null;
+data.toString(); 
+
+3) Boolean (True/False) mein badalna: Iske liye Boolean() use hota hai.
+
+Boolean(1);   // Output: true
+Boolean(0);   // Output: false (0, empty string "", null, undefined sab false hote hain)
+

@@ -1,5 +1,5 @@
 // var keyword is old and in js have some limitaions for scope wise in block scope and functional scope that why not too much use..
-
+"use strict"
 //1
  var name='rahul' 
 
@@ -59,7 +59,6 @@ function lettcheck()
 }
 lettcheck();
 
-
 //2 function lettcheck()
 function lettcheckanother()
 { let a=20
@@ -87,35 +86,31 @@ lettcheckanothertwo();
 
 if(true)
 {
-    let num=69
-     //console.log(num)
+    var num=69
+     console.log(window.num)
   
 }
   console.log(num)
   // let is blocked scope
 
 
-
-  
 rahulcity='chd'
+console.log(rahulcity)
+  
+// ***  wihout var let const it will be stored in  brower main window object par ek propetie bna dega sample like alert console values, this is called implict global varible
 
 time='56'
 const Time=44.00
 
 
+// let cout =10
+// {
+//  var cout=78
 
+// }
 
-
-
-
-
-
-
-
-
-
-
-
+let x= x+10
+console.log(x)
 
 
 // particess
@@ -138,8 +133,6 @@ const Time=44.00
 let score = 99;
 Score = 100;
 console.log(score);
-
-
 
 
 // [QUESTION 2]
@@ -190,3 +183,5 @@ let fruits = ["Apple", "Banana"];
 fruits.push("Mango");
 fruits = "Orange";
 console.log(fruits);
+
+
