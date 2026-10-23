@@ -1,0 +1,81 @@
+
+JS Memory Management:
+
+
+ Stack vs Heap (The Two Warehouses)
+
+• Stack:
+	• Primitives ka Asli Data: Jitne bhi simple data types hain (number, string, boolean, null, undefined), unka asli data seedhe Stack me jata hai.
+	• Example: age = 25, name = "Amit"
+	• Yeh fixed size ka hota hai aur ekdum fast kaam karta hai.
+• Heap:
+	• Yahan bade aur dynamic data types (Objects, Arrays, Functions) save hote hain.
+	• Yeh bada store room hai, jo thoda unstructured aur stack se thoda slow hota hai.
+	
+
+2. Code Behavior (Copy Kaise Hota Hai?)
+
+• Pass by Value (Stack): Primitives ko copy karne par bilkul independent, naya variable banta hai. Ek ko badlo, dusre par asar nahi padta.
+• Pass by Reference (Heap): Objects/Arrays ko copy karne par sirf unka address (pointer) copy hota hai. Ek ko badlo, toh asli data badal jata hai (Bug alert! ⚠️).
+	• Solution: Hamesha Spread Operator (...) ya .map() ka use karein naya object banane ke liye.
+
+3. Browser Hang aur Errors (Heap Problems)
+
+• Aw, Snap! / Out of Memory Error: Agar infinite loop chala kar Heap me bina ruke data bharte gaye, toh computer ki RAM full ho jayegi aur browser crash ho jayega.
+• Browser Lag / Hang: Jab Heap me bohot saara faltu data jama ho jata hai, toh JS ka Garbage Collector use saaf karne aata hai. Safai karte waqt browser kuch milliseconds ke liye freeze (atak) jata hai.
+
+
+
+4. Real-Life Working Model (Kam kaise hota hai?)
+
+• Jab aap kisi primitive (age) ko bulate ho, toh JS engine Stack se seedhe 25 utha leta hai.
+• Jab aap kisi object (user.role) ko bulate ho, toh JS engine pehle Stack me jata hai, wahan se address (0x7ffa12) padhta hai, fir us address ke sahare Heap me bhaagta hai aur wahan se asli data "Admin" nikaal kar laata hai.
+
+
+
+5. Heap Memory (Bada aur Khula Warehouse)
+
+Heap ke andar sirf ek (1) cheez save hoti hai:
+• Non-Primitives ka Asli Data: Objects, Arrays, aur Functions ka asli bada bakshe jaisa data sirf aur sirf Heap me store hota hai.
+	• Example: { role: "Admin" } ya ["Red", "Blue"]
+
+
+
+
+
+
+
+
+
+• Direct Copy Alert: let obj2 = obj1 karne se sirf Stack ka Address copy hota hai, asli data nahi. Ek ko badloge, dusra apne aap badal jayega!
+• Safe Copy: Agar asli object ko safe rakhna hai, toh hamesha Spread Operator (...) ka use karein (jaise: let obj2 = { ...obj1 }). Isse Heap me ek naya alag data box banta hai.
+
+**************************************************************************
+
+                                                 Call Stack Kya Hai? (The Control Room)
+
+Jaise humne padha ki Stack memory me variables save hote hain, waise hi Stack ka ek hissa yeh track karta hai ki kaun sa function abhi chal raha hai aur iske baad kaun sa chalega. Isko hum kehte hain Call Stack.
+Call Stack ka ek simple rule hai: LIFO (Last In, First Out).
+
+ex:- function functionDoosra() {
+  console.log("Doosra function chal gaya!");
+}
+
+function functionPehla() {
+  functionDoosra(); // Pehle ke andar se doosre ko call kiya
+}
+
+functionPehla(); // Sabse pehle isko call kiya
+
+
+
+--  Dev Galti: Stack Overflow Error Kya Hai?--
+ex
+
+function khudKoCallKaro() {
+  khudKoCallKaro(); // Apne aap ko hi call karta ja raha hai
+}
+khudKoCallKaro();
+
+
+ Golden Rules for Coding 🚀

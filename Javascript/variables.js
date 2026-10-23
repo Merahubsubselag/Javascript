@@ -123,6 +123,24 @@ console.log(x)
 
 
 
+//  Scope Kya Hai? (Aapki Limit/Boundary)
+
+// Scope ka matlab hai Aapka variable aapke code me kahan tak zinda hai. Agar aap kisi variable ko uski boundary ke bahar use karne ki koshish karoge, toh JS error de dega: ReferenceError: variable is not defined.
+// JavaScript me main do tarah ke scope hote hain:
+// • Global Scope: Jo variable kisi function ke bahar khule me likha ho. Ise poore code me kahin se bhi use kiya ja sakta hai.
+// • Local / Function Scope: Jo variable kisi function ke andar { } ke beech me likha ho. Ise sirf usi function ke andar use kar sakte hain, bahar se access nahi kar sakte.
+
+// 2. Lexical Environment Kya Hai? (Upar Dekhne Ka Rule)
+
+// "Lexical" ka simple matlab hota hai "Kahan likha hua hai".
+// Jab aap kisi function ke andar koi variable dhoondte ho aur wo wahan nahi milta, toh JavaScript ka engine apne parent (apne se upar wale) area me jaakar us variable ko dhoondta hai. Is poore system ko Lexical Environment kehte hain.
+
+
+// Short Notes Jo Aapko Yaad Rakhne Hain:
+
+// 1. Andar se bahar dekhna allowed hai (Child apne Parent ka data access kar sakta hai).
+// 2. Bahar se andar dekhna block hai (Parent apne Child ka local data access nahi kar sakta).
+
 
 
                     //  🔥 ERROR DETECTION QUIZ 🔥

@@ -1,3 +1,12 @@
+// • SyntaxError = Likhne ka tareeka galat hai.
+// • ReferenceError = Wo variable/naam hi gayab hai (exist nahi karta).
+// • TypeError = Variable toh hai, par aap uske sath galat kaam kar rahe hain (Jaise ghoode ko gaadi ki tarah udane ki koshish karna, 
+//    ya const ko badalna, ya number ko uppercase karna).
+
+
+
+
+
 ======================================================================
                   JAVASCRIPT ERRORS LIST & PRACTICE CODE
 ======================================================================
