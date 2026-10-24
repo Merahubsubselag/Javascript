@@ -32,6 +32,59 @@ let nuuconvert= String(typeof nuu)
 console.log(nuuconvert)
 
 
+//Implicit Type Coercion Operators (ya short-cut methods) kehte hain.
+
+
+//Unary Plus (+) — Convert to Number
+//Yeh kisi bhi cheez ko Number banane ke liye use hota hai.
+
+
+• +"42" → 42
+• +"" → 0 (Khali string hamesha 0 banti hai)
+• +true → 1 / +false → 0
+• +null → 0
+• +undefined → NaN
+• +"Rahul" → NaN
+
+//Double NOT (!!) — Convert to Boolean
+
+// kisi bhi value ke aage do baar exclamation mark (!!) laga dete hain, toh woh value Boolean (true/false) mein badal jaati hai.
+// Yeh kaam kaise karta hai?
+// • Pehla ! value ko ulti boolean mein badalta hai (Invert).
+// • Doosra ! use wapas sahi karke uski asli boolean value de deta hai.
+
+
+
+
+
+// 🔴 Falsy Values (Yeh sab hamesha false banenge)
+console.log(!!"");          // false (Khali string)
+console.log(!!0);           // false (Zero number)
+console.log(!!null);        // false
+console.log(!!undefined);   // false
+console.log(!!NaN);         // false
+
+// 🟢 Truthy Values (Baki sab true banenge)
+console.log(!!"Rahul");     // true (Bhri hui string)
+console.log(!!55);          // true (Any non-zero number)
+console.log(!!{});          // true (Khali object bhi true hota hai!)
+console.log(!![]);          // true (Khali array bhi true hota hai!)
+
+//Khali String Concatenation (+ "") — Convert to String
+
+//Agar aapke paas koi Number ya Boolean hai aur aap uske aage + "" 
+// (plus khali string) likh dete hain, toh JavaScript use bina kisi function ke String mein badal deta hai.
+
+let score = 500;
+let stringScore = score + ""; 
+
+console.log(stringScore);        // Output: "500"
+console.log(typeof stringScore); // Output: "string"
+
+console.log(true + "");          // Output: "true" (String ban gaya)
+console.log(null + "");          // Output: "null" (String ban gaya)
+
+
  //------------------  operations --------------
 
 
