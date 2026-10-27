@@ -1,0 +1,97 @@
+unctions aur Call Stack.
+Jab aap JavaScript me koi function banate ho aur use chalate (call karte) ho, toh Stack Memory uske sath kya khel khelti hai, aaiye isko live dekhte hain.
+
+1. Call Stack Kya Hai? (The Control Room)
+
+Jaise humne padha ki Stack memory me variables save hote hain, waise hi Stack ka ek hissa yeh track karta hai ki kaun sa function abhi chal raha hai aur iske baad kaun sa chalega. Isko hum kehte hain Call Stack.
+Call Stack ka ek simple rule hai: LIFO (Last In, First Out).
+• Jo function sabse aakhir me call hoga, wo sabse pehle khatam hokar stack se bahar nikal jayega.
+
+2. Live Example Se Samjhein
+
+Maan lijiye aapne yeh chota sa code likha jahan ek function ke andar se dusra function call ho raha hai:
+javascript
+function functionDoosra() {
+  console.log("Doosra function chal gaya!");
+}
+
+function functionPehla() {
+  functionDoosra(); // Pehle ke andar se doosre ko call kiya
+}
+
+functionPehla(); // Sabse pehle isko call kiya
+Use code with caution.
+
+Note: Global Context ka matlab hai aapki poori JS ki file. Jab tak file poori read nahi hoti, yeh stack ke sabse neeche rehti hai.
+
+⚠️ Dev Galti: Stack Overflow Error Kya Hai?
+
+Ab aapko samajh aayega ki browser hang kaise hota hai jo humne pehle discuss kiya tha. Agar aap ek aisa function bana do jo khud ko hi baar-baar call karta rahe aur kabhi ruke hi na (Infinite Recursion):
+javascript
+function khudKoCallKaro() {
+  khudKoCallKaro(); // Apne aap ko hi call karta ja raha hai
+}
+khudKoCallKaro();
+Use code with caution.
+Peeche kya hoga? Call Stack me khudKoCallKaro() ke upar khudKoCallKaro() ki building banti hi chali jayegi. Ek point par stack ki limit khatam ho jayegi aur browser crash ho kar error dega:
+❌ Uncaught RangeError: Maximum call stack size exceeded (Isko kehte hain Stack Overflow).
+Kya aapko yeh samajh aaya ki Call Stack functions ka aana-jaana kaise manage karta hai?
+Agar yeh clear hai, toh hum agle super-important topic par chal sakte hain: Scope aur Lexical Environment (Yaani kaun sa variable kis function ke andar dikhega aur kahan nahi dikhega). Shuru karein?
+
+bta
+
+Maan lijiye aapne ek ghar (Function) banaya. Us ghar ke andar jo saman (Variables) rakha hai, use bahar khade log nahi dekh sakte. Lekin ghar ke andar betha insan bahar ka saman dekh sakta hai.
+Bas isi rule ko JavaScript me Scope aur Lexical Environment kehte hain.
+Aaiye isko ekdam aam bhasha aur live example se samajhte hain.
+
+1. Scope Kya Hai? (Aapki Limit/Boundary)
+
+Scope ka matlab hai Aapka variable aapke code me kahan tak zinda hai. Agar aap kisi variable ko uski boundary ke bahar use karne ki koshish karoge, toh JS error de dega: ReferenceError: variable is not defined.
+JavaScript me main do tarah ke scope hote hain:
+• Global Scope: Jo variable kisi function ke bahar khule me likha ho. Ise poore code me kahin se bhi use kiya ja sakta hai.
+• Local / Function Scope: Jo variable kisi function ke andar { } ke beech me likha ho. Ise sirf usi function ke andar use kar sakte hain, bahar se access nahi kar sakte.
+
+2. Lexical Environment Kya Hai? (Upar Dekhne Ka Rule)
+
+"Lexical" ka simple matlab hota hai "Kahan likha hua hai".
+Jab aap kisi function ke andar koi variable dhoondte ho aur wo wahan nahi milta, toh JavaScript ka engine apne parent (apne se upar wale) area me jaakar us variable ko dhoondta hai. Is poore system ko Lexical Environment kehte hain.
+
+3. Live Example Se Samjhein
+
+Is chote se code ko dhyan se dekhiye:
+javascript
+let globalSaman = "Main bahar khula hoon"; // Global Variable
+
+function ghar() {
+  let localSaman = "Main ghar ke andar hoon"; // Local Variable
+  
+  console.log(globalSaman); // Yeh chal jayega? HAAN! (Bahar ka saman andar dikhta hai)
+  console.log(localSaman);  // Yeh chal jayega? HAAN! (Ghar ka saman hai)
+}
+
+ghar(); // Function chalaya
+
+console.log(localSaman); // ❌ ERROR! (Bahar khada aadmi ghar ke andar ka saman nahi dekh sakta)
+Use code with caution.
+
+4. 📊 Scope Chain Kaise Kaam Karti Hai? (The Ladder)
+
+Maan lijiye ek ke andar ek function likha hai (Nested Functions). Tab JS variable ko niche se upar ki taraf ek sidi (chain) ki tarah dhoondta hai:
+javascript
+let dadaJi = "Dada Ji ki zameen";
+
+function papa() {
+  let papaKiCar = "Papa ki car";
+
+  function beta() {
+    let betaKaKhilona = "Beta ka khilona";
+
+    console.log(betaKaKhilona); // Sahi hai (Khud ka saman hai)
+    console.log(papaKiCar);     // Sahi hai (Papa se le sakta hai - Upar dekha)
+    console.log(dadaJi);        // Sahi hai (Dada ji se le sakta hai - Sabse upar dekha)
+  }
+  beta();
+}
+papa();
+Use code with caution.
+Rule: beta function apne variables bhi use kar sakta hai, papa ke bhi aur dadaJi ke bhi. Lekin papa function niche jaakar betaKaKhilona use nahi kar sakta. Power hamesha neeche se upar ki taraf jaati hai!

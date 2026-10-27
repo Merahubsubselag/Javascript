@@ -1,0 +1,509 @@
+
+
+anchor()
+at()
+big()
+blink()
+bold()
+ charAt()
+charCodeAt
+ charCodeAt()
+codePointAt
+ codePointAt()
+ concat()
+String()
+ endsWith()
+fixed()
+fontcolor()
+fontsize()
+ includes()
+ indexOf()
+ isWellFormed()
+italics()
+lastIndexOf()
+length
+ link()
+ localeCompare()
+ match()
+ matchAll()
+ normalize()
+padEnd()
+ padStart()
+ repeat()
+ replace()
+ replaceAll()
+ search()
+ slice()
+ small()
+ split()
+ startsWith()
+ strike()
+ sub()
+ substr()
+ substring()
+ sup()
+ toLocaleLowerCase()
+ toLocaleUpperCase()
+ toLowerCase()
+ toString()
+ toUpperCase()
+ toWellFormed()
+ trim()
+ trimEnd()
+ trimStart()
+ trimEnd()
+ trimStart()
+ valueOf() 
+1. 🚨 Missing / Pending Methods (Jo aapki list me nahi hain)
+
+Yeh modern JavaScript me bohot use hote hain, inko apni list me add kar lijiye:
+• matchAll() (Aapki list me hai, par iska ek bhaai hai regex ke liye)
+• replaceAll() (Yeh bhi list me hai, bohot useful hai)
+• String.raw() : Yeh ek special method hai jo string ke andar ke escape characters (jaise \n ya \t) ko process nahi karta, jaisa likha hai waisa hi raw print kar deta hai [mozilla.org].
+• String.fromCodePoint() : Yeh number (Unicode) ko wapas text ya emoji me badalta hai [mozilla.org] (jaise 97 se "a" banna).
+• String.fromCharCode() : Yeh bhi charCodeAt ka ulta kaam karta hai (numbers se string banana) [mozilla.org].
+
+
+
+3. 🎯 Project me sabse zyada kaam aane wale Top 10 Methods
+
+Jab aap aage jaakar project banaoge, toh aapki list me se sirf ye 10-12 methods hi hain jo 95% time use honge:
+1. length : String ki lambai check karne ke liye (Yeh property hai, function nahi) [mozilla.org].
+2. toLowerCase() / toUpperCase() : Text ko chota ya bada karne ke liye (Search features me bohot kaam aata hai) [mozilla.org].
+3. trim() : User jab form bharta hai, toh aage-piche ki faltu spaces hatane ke liye [mozilla.org].
+4. includes() : Yeh check karne ke liye ki string me koi word maujood hai ya nahi (true/false deta hai) [mozilla.org].
+5. split() : Ek lambi string ko todkar array banane ke liye [mozilla.org].
+6. slice() : String ka ek chota tukda kaat kar nikalne ke liye [mozilla.org].
+7. replace() / replaceAll() : Kisi word ko badal kar dusra word likhne ke liye [mozilla.org].
+8. indexOf() : Kisi akshar ya word ki position (index) pata karne ke liye [mozilla.org].
+9. startsWith() / endsWith() : Check karne ke liye ki string kis word se shuru ya khatam ho rahi hai [mozilla.org].
+10. at() : Negative index use karke string ke aakhiri akshar ko aaram se nikalne ke liye (jaise str.at(-1)) [mozilla.org].
+
+
+2. 🗑️ Deprecated Methods (Jo ab use NAHI hote)
+
+Aapki list me jo HTML wrapper methods hain, wo ab purani baat ho chuke hain (Web standards ne unhe hata diya hai). Real projects me inka use strict mana hai kyunki ab HTML CSS se banti hai, JS ke in methods se nahi:
+• anchor(), big(), blink(), bold(), fixed(), fontcolor(), fontsize(), italics(), link(), small(), strike(), sub(), sup().
+• substr() : Iski jagah ab hamesha slice() ya substring() ka use kiya jata hai [mozilla.org].
+
+
+
+
+
+samples
+
+Scenario 1: User Login aur Form Validation (Sabse zyada use hone wale)
+
+Jab user aapki website par sign-up ya login karta hai, toh uske naam aur email ko saaf-suthra karne ke liye ye methods use hote hain:
+javascript
+let inputEmail = "  UserMe@Email.Com   "; // User ne aage-piche space de di aur caps me likha
+
+// 1. trim(), trimStart(), trimEnd() -> Faltu spaces hatane ke liye
+let cleanEmail = inputEmail.trim(); // "UserMe@Email.Com"
+// (trimStart() sirf aage ki space hatata hai, trimEnd() sirf piche ki)
+
+// 2. toLowerCase() aur toUpperCase() -> Email ko chota karne ke liye (taaki database me match ho sake)
+let finalEmail = cleanEmail.toLowerCase(); // "userme@email.com"
+
+console.log(finalEmail); // "userme@email.com" -> Ab ye database me save karne ke liye ready hai
+Use code with caution.
+
+Scenario 2: E-Commerce Website me Search Feature
+
+Maan lijiye user aapki shopping website par "Nike White Shoes" search kar raha hai. Aapko check karna hai ki aapke product list me ye words hain ya nahi.
+javascript
+let productTitle = "Nike Air Max White Running Shoes";
+let searchInput = "white shoes";
+
+// 3. includes() -> Check karta hai ki word andar hai ya nahi (true/false)
+console.log(productTitle.toLowerCase().includes("white")); // true
+
+// 4. startsWith() aur endsWith() -> Shuruat aur aakhiri word check karne ke liye
+console.log(productTitle.startsWith("Nike")); // true (Brand check karne ke liye)
+console.log(productTitle.endsWith("Shoes"));  // true
+
+// 5. indexOf() aur lastIndexOf() -> Word ki exact position dhoondne ke liye
+console.log(productTitle.indexOf("Air"));     // 5 (Kyunki 'Air' 5th index se shuru ho raha hai)
+console.log(productTitle.lastIndexOf("Shoes")); // 27 (Agar multiple baar ho toh aakhiri wala batata hai)
+Use code with caution.
+
+Scenario 3: Social Media App (Twitter/Instagram) post manager
+
+Social media text ko edit karne, truncate (chota) karne ya badalne ke liye ye use hote hain:
+javascript
+let tweet = "I love Javascript! Javascript is awesome.";
+
+// 6. replace() aur replaceAll() -> Words badalna
+let safeTweet = tweet.replace("Javascript", "JS"); // Sirf pehle wale ko badlega
+let globalChange = tweet.replaceAll("Javascript", "JS"); // Saare "Javascript" ko "JS" kar dega
+// Output: "I love JS! JS is awesome."
+
+// 7. slice(), substring(), substr() -> Text ko kaat kar chota karna (jaise Read More... ke liye)
+let longText = "This is a very long blog post title that needs to be shortened";
+let shortTitle = longText.slice(0, 10); // 0 index se lekar 10 tak katega
+console.log(shortTitle + "..."); // "This is a ..."
+
+// 8. length -> Character count check karne ke liye (Twitter character limit)
+console.log(tweet.length); // 41
+Use code with caution.
+
+Scenario 4: Chat Application me Bad Words Filter (Regex ke saath)
+
+javascript
+let chatMessage = "This is stupid and very stupid.";
+
+// 9. search() -> Position dhoondta hai lekin isme Regex (Pattern) use kar sakte hain
+console.log(chatMessage.search(/stupid/)); // 8 (Pehli position batadi)
+
+// 10. match() aur matchAll() -> Saare matching words ko nikaal kar list bana deta hai
+let badWords = chatMessage.match(/stupid/g); 
+console.log(badWords); // ["stupid", "stupid"] (Pata chal gaya user ne 2 baar abuse kiya)
+Use code with caution.
+
+Scenario 5: Data Formatting (Invoice/Bill Numbers aur OTP)
+
+javascript
+let billNumber = "45";
+
+// 11. padStart() aur padEnd() -> Digits ko fix length ka banane ke liye (aage 0 lagana)
+let finalBill = billNumber.padStart(5, "0"); // Total length 5 karega, khali jagah me 0 bharega
+console.log(finalBill); // "00045"
+
+// 12. repeat() -> Kisi character ko baar-baar print karne ke liye
+let star = "*";
+console.log(star.repeat(5)); // "*****" (Password hide karne ke liye)
+Use code with caution.
+
+Scenario 6: String ko Array me badalna (CSV Data Parser)
+
+javascript
+let csvData = "Rahul,Amit,Raj,Vikram";
+
+// 13. split() -> Kisi ek nishani se string ko tod kar Array (List) bana deta hai
+let studentsArray = csvData.split(","); 
+console.log(studentsArray); // ["Rahul", "Amit", "Raj", "Vikram"] -> Ab ispar loop chala sakte hain
+Use code with caution.
+
+Scenario 7: Specific Character ko Access karna (Ek-ek akshar nikalna)
+
+javascript
+let word = "JavaScript";
+
+// 14. charAt() aur at() -> Kisi specific position ka akshar nikalna
+console.log(word.charAt(0)); // "J"
+console.log(word.at(-1));    // "t" (at() ka fayda ye hai ki isme -1 dene se piche se aakhiri akshar mil jata hai)
+Use code with caution.
+
+Scenario 8: Security aur Advanced Unicodes (Emoji aur Special Text)
+
+javascript
+let text = "Hello 👋";
+
+// 15. charCodeAt() aur codePointAt() -> Har character ka peeche ka computer number (Unicode) nikalna
+console.log(text.codePointAt(6)); // 128075 (👋 Emoji ka computer code)
+
+// 16. isWellFormed() aur toWellFormed() -> Web security me check karna ki string me koi tuta hua unicode toh nahi hai
+console.log(text.isWellFormed()); // true (Data safe hai)
+
+// 17. concat() -> Do strings ko jodna (Vaise log iski jagah + use karte hain)
+console.log("Hello ".concat("World")); // "Hello World"
+
+// 18. valueOf() aur toString() -> Kisi bhi object ya data ko string me badalna
+let num = 100;
+console.log(num.toString()); // "100" (Ab ye text ban gaya)
+Use code with caution.
+
+Inhe list se HATA DEIN (Banned/Deprecated HTML Wrappers):
+
+Aapki list me jo methods hain jaise bold(), italics(), blink(), fontcolor(), anchor(), link(), big(), small(), strike(), sub(), sup(), fixed(), fontsize() — ye real projects me koi bhi use nahi karta. Purane zamane me ye JS se seedhe HTML tags banane ke liye banaye gaye the (jaise str.bold() se <b>text</b> banna), par ab ye kaam pure CSS se hota hai.
+Aapne strings ke saare methods ko practically dekh liya! Kya aap ab inme se kuch select karke ek chota sa mini-project (jaise bad-words filter ya email validator) khud mere saath code karna chahte hain?
+
+but string ko reverse kese karte hai konsa method hai es mai
+
+JavaScript me String ko direct reverse karne ka koi bhi built-in method nahi hota [mozilla.org]. JavaScript me reverse karne ka function sirf Arrays ke paas hota hai (jise .reverse() kehte hain) [mozilla.org].
+Isiliye, agar aapko kisi string ko ulti (reverse) karni hai, toh aapko aapki list ke do special methods aur array ke ek method ko mila kar ek 3-Step Trick use karni padti hai.
+Aaiye dekhte hain kaise:
+
+🎯 String Reverse Karne Ki 3-Step Trick
+
+Maan lijiye aapka naam "Rahul" hai aur aapko ise "luhaR" banana hai:
+javascript
+let name = "Rahul";
+
+// Step 1: .split("") use karke string ko tod kar Array banao
+let arrayName = name.split(""); 
+// Output: ["R", "a", "h", "u", "l"]
+
+// Step 2: Array ke built-in .reverse() method se list ko ulta karo
+let reversedArray = arrayName.reverse(); 
+// Output: ["l", "u", "h", "a", "R"]
+
+// Step 3: .join("") use karke array ko wapas jod kar String banao
+let finalResult = reversedArray.join(""); 
+// Output: "luhaR"
+
+console.log(finalResult); // "luhaR"
+Use code with caution.
+
+🔥 Pro-Tip: Real Projects me ise ek single line me likha jata hai:
+
+Jab aap pro ho jaoge, toh aapko alag-alag variables banane ki zaroorat nahi padegi. Aap teenon ko ek sath chain kar doge:
+javascript
+let str = "JavaScript";
+
+let reversedStr = str.split("").reverse().join("");
+
+console.log(reversedStr); // "tpircSavaJ"
+Use code with caution.
+
+Breakdown:
+
+1. split(""): String se Array banaya.
+2. reverse(): Array ko ulta kiya.
+3. join(""): Array se wapas String banaya.
+Yeh trick interview me bohot puchi jaati hai! Kya aapko yeh String se Array aur Array se String wala logic samajh aaya? Agar aap chahein toh hum bina is trick ke, ek for loop chala kar string ko manually reverse karna bhi seekh sakte hain. Kya loop wala tarika dekhna hai?
+
+tabi to pucha acha muje strings se realted question puch
+
+Bahut badhiya! Jab tak aap khud se questions solve nahi karoge, tab tak ye methods dimaag me fit nahi honge.
+Main aapse JavaScript Strings ke 3 real-world practical questions pooch raha hoon (bilkul interview aur project level ke). Aap ek-ek karke inka code sochiye aur mujhe batayiye.
+
+🏃‍♂️ Challenge 1: Email Hider (Privacy Feature)
+
+Aapko ek aisa function banana hai jo user ke email ko poora na dikhaye, balki thoda hide kar de (security ke liye, jaise OTP bhejte waqt hota hai).
+• Input: "rahulkumar@email.com"
+• Output: "rahul...@email.com"
+• Hint: Aapko @ ki position dhoondni padegi aur slice() ya split() ka use karna padega.
+
+🏃‍♂️ Challenge 2: Palindrome Checker (Interview Special)
+
+Aapko check karna hai ki koi word seedha aur ulta padhne me ek jaisa hai ya nahi (Ise Palindrome kehte hain). Agar hai toh true, nahi toh false.
+• Input 1: "racecar" ──► Output: true (Kyunki ulta padhne par bhi racecar hi banta hai)
+• Input 2: "hello" ──► Output: false
+• Hint: Jo abhi humne reverse karne wali trick seekhi, uska use karke compare karna hai!
+
+🏃‍♂️ Challenge 3: Word Counter & Spacing Fixer
+
+User ne ek lambi string likhi hai, lekin galti se beech-beech me bohot saari faltu spaces de di hain. Aapko pehle saari faltu spaces hatani hain aur fir batana hai ki total kitne words (shabd) hain.
+• Input: "  JavaScript    is     fun   "
+• Output: "JavaScript is fun" aur Total Words: 3
+• Hint: trim() aur split() ke sath thoda dimaag lagana padega.
+Aap pehle Challenge 1 (Email Hider) ka code likhne ki koshish kariye (chahe thoda galat hi kyun na ho). Mujhe batayiye aap isko kaise solve karoge?
+
+muje ese questions ke lea kya strong karna hoga
+
+Aise logic-based aur interview wale questions ko aasani se solve karne ke liye, aapko JavaScript ki tin (3) cheezein sabse zyada strong karni hongi.
+Agar aapne ye tin cheezein samajh li, toh aap string ka koi bhi question bina kisi tension ke nikal doge:
+
+1. Data Type Conversion (String ⇄ Array ka Khel)
+
+String ke paas khud ke bohot kam powers (methods) hote hain. JavaScript me sabse zyada powers Arrays ke paas hote hain.
+• Aapko har sawal me pehle ye sochna hai: "Kya main is string ko array me badal kar aasani se solve kar sakta hoon?"
+• Kaise strong karein: split() se string ko array banana, aur join() se array ko wapas string banana—ye dono methods aapki finger-tips par hone chahiye [mozilla.org].
+
+2. Array Methods (JS ki Asli Power)
+
+Kyunki aap string ko aksar array me badaloge, isliye aapko ye 4-5 array methods seekhne honge:
+• .map() (Har ek element ko badalne ke liye)
+• .filter() (Faltu cheezein ya khali spaces hatane ke liye)
+• .reverse() (Ulta karne ke liye) [mozilla.org]
+• .slice() (Tukda nikalne ke liye)
+
+3. Loop Aur Indexing Logic (Aankhein Band Karke Index Sochna)
+
+String me har ek akshar ka ek number (index) hota hai jo 0 se shuru hota hai. Aapko hamesha index ke sath khelna aana chahiye:
+• Agar mujhe @ ke pehle ka text chahiye, toh mujhe pata hona chahiye ki @ kis index par hai (indexOf('@')) [mozilla.org].
+• Ek-ek akshar par check lagane ke liye standard for loop ya for...of loop chalana aana chahiye.
+
+💡 Ek Choti Si Advice (Jo Senior Devs Dete Hain):
+
+Aapko saare functions ke naam ratne ki zaroorat nahi hai. Google aur MDN Docs hamesha aapke paas rahenge. Aapko bas Logic (Problem Solving) strong karni hai, yaani: "Sawal ko chote-chote tukdon me kaise todein."
+Chaliye ek kaam karte hain, jo maine Challenge 1 (Email Hider) pucha tha, use hum dono milkar line-by-line solve karte hain taaki aapka dar khul jaye.
+Kya aap taiyar hain? Main pehli line ka logic samjhata hoon!
+
+muje phele simple string ke predefined functuion bta dea jab aarya karo ga tab string ko aary ke sath khelo ga
+
+Aapne bilkul perfect baat boli hai! Pehle base strong hona chahiye, step-by-step chalna hi best tareeka hai. Jab tak hum Arrays nahi seekhte, tab tak hum string ko sirf uske khud ke simple predefined functions se hi handle karenge.
+Toh chaliye, bina kisi array ke, sirf pure string methods ka use karke main aapse 3 ekdum simple aur direct sawal puchta hoon. Aap inka answer sochiye:
+
+🟢 Question 1: Username Capitalizer
+
+Maan lijiye user ne apna naam small letters me register kiya: "rahul". Aapko usko screen par hamesha bade aksharon me yaani "RAHUL" dikhana hai.
+• Aap iske liye kaun sa method use karoge?
+
+🟢 Question 2: Password Length Checker
+
+Aapko ek simple validation lagani hai ki agar user ka password 8 characters se kam hai, toh aap use error dikhaoge.
+• Kisi string ki total length pata karne ke liye aap string ki kaun si property check karoge?
+
+🟢 Question 3: Coupon Code Validator
+
+Aapki website par ek discount coupon code hai "FESTIVE50". User ne galti se aage-piche spaces de kar type kiya: "  FESTIVE50   ".
+• Aap user ke input se aage-piche ki faltu spaces hatane ke liye kaun sa simple predefined method use karoge taaki coupon match ho sake?
+In teeno ke answers ekdum direct hain aur aapki list me hi chhupay hain. Ek baar koshish kariye aur mujhe batayiye in teeno sawalon ke liye kaun sa method/property use hoga?
+
+bahi phele muje string funcion learn karne then partices fr jaake yhe question puch particak ke lea
+
+Bhai, bilkul sahi baat hai. Pehle weapons (functions) chalana seekhna zaroori hai, tabhi toh jung (practice) me maza aayega! My mistake, hum pehle saare important functions ek-ek karke seedhe seekhte hain.
+Chaliye, sabse pehle hum String ke Top 10 sabse zaroori functions ko ek-ek karke poore detail me practical ke sath seekhte hain. Aap mere sath ek-ek karke samajhiye.
+
+1. .length (Property - Lambai naapne ke liye)
+
+• Yeh kya karta hai? Yeh batata hai ki aapki string me total kitne akshars (characters) hain, space ko mila kar [mozilla.org].
+• Note: Isme aage brackets () nahi lagte, kyunki yeh ek property hai [mozilla.org].
+• Live Practical:javascript
+let name = "Rahul Kumar"; 
+console.log(name.length); // Output: 11 (Kyunki beech ki space bhi gini jayegi)
+Use code with caution.
+
+2. .toUpperCase() aur .toLowerCase() (Case badalna)
+
+• .toUpperCase(): Poori string ko BADE (Capital) letters me badal deta hai [mozilla.org].
+• .toLowerCase(): Poori string ko chote (Small) letters me badal deta hai [mozilla.org].
+• Live Practical:javascript
+let text = "JaVaScRiPt";
+
+console.log(text.toUpperCase()); // Output: "JAVASCRIPT"
+console.log(text.toLowerCase()); // Output: "javascript"
+Use code with caution.
+
+3. .trim() (Faltu kachra/space saaf karna)
+
+• Yeh kya karta hai? Agar kisi string ke sirf aage ya sirf piche faltu spaces (Khaali jagah) hain, toh unhe saaf kar deta hai [mozilla.org]. (Beech ki space ko nahi chhedta) [mozilla.org].
+• Live Practical:javascript
+let password = "   mySecret123   ";
+console.log(password.trim()); // Output: "mySecret123" (Aage-piche ki space gayab!)
+Use code with caution.
+
+4. .includes() (Dhoondne ke liye)
+
+• Yeh kya karta hai? Yeh check karta hai ki kya koi word ya akshar aapki string ke andar maujood hai ya nahi [mozilla.org]. Agar hai toh yeh true bolega, nahi toh false [mozilla.org]. (Yeh case-sensitive hota hai, yaani capital/small ka dhyan rakhna padega) [mozilla.org].
+• Live Practical:javascript
+let sentence = "I love coding in JavaScript";
+
+console.log(sentence.includes("coding")); // Output: true
+console.log(sentence.includes("HTML"));   // Output: false
+Use code with caution.
+
+5. .indexOf() (Position pata karne ke liye)
+
+• Yeh kya karta hai? Yeh batata hai ki koi word ya akshar kis index (number) se shuru ho raha hai [mozilla.org]. Yaad rakho JS me counting 0 se shuru hoti hai. Agar wo word string me nahi milta, toh yeh hamesha -1 deta hai [mozilla.org].
+• Live Practical:javascript
+let game = "Cricket";
+// Index mapping: C=0, r=1, i=2, c=3, k=4, e=5, t=6
+
+console.log(game.indexOf("i"));     // Output: 2
+console.log(game.indexOf("Football")); // Output: -1 (Kyunki Football nahi hai)
+Use code with caution.
+Bhai pehle mujhe batao, kya yeh Pehle 5 basic functions (length, toUpperCase, toLowerCase, trim, includes, indexOf) aapko ekdum acche se samajh aa gaye?
+Agar haan, toh main agle 5 advance wale (slice, replace, at, etc.) samjhata hoon. Bataiye!
+
+bta
+
+Pehle 5 functions clear hain, ab aate hain agle 5 sabse zaroori String functions par, jinke bina project banana namumkin hai. Inhe bhi dhyan se practical ke saath dekhiye:
+
+6. .slice(start, end) (Tukda kaat kar nikalna)
+
+• Yeh kya karta hai? Yeh string me se ek chota tukda (substring) kaat kar nikalta hai [mozilla.org]. Aapko batana padta hai ki kahan se shuru karna hai (start) aur kahan par khatam (end).
+• Rule: end index par jo akshar hota hai, use yeh nahi ginta (usse ek pehle tak hi kat-ta hai).
+• Live Practical:javascript
+let word = "JavaScript";
+// J=0, a=1, v=2, a=3, S=4, c=5, r=6, i=7, p=8, t=9
+
+let chunk = word.slice(0, 4); 
+console.log(chunk); // Output: "Java" (0 se 3 tak kata, 4th index 'S' ko chhod diya)
+
+7)
+
+.at(index) (Kisi bhi number ka akshar nikalna)
+
+• Yeh kya karta hai? Yeh batata hai ki aapke diye huye index (number) par kaun sa akshar baitha hai [mozilla.org].
+• Fayda: Iska sabse bada fayda ye hai ki agar aap isme -1 doge, toh ye piche se sabse aakhiri akshar nikaal kar de dega [mozilla.org]. (Yeh charAt() se zyada modern aur accha hai) [mozilla.org].
+• Live Practical:javascript
+let name = "Rahul";
+
+console.log(name.at(0));  // Output: "R" (Pehla akshar)
+console.log(name.at(-1)); // Output: "l" (Piche se pehla / aakhiri akshar)
+
+8)
+
+replace(old, new) aur .replaceAll(old, new) (Badalna)
+
+• .replace(): Yeh string me kisi word ko dhoondta hai aur use naye word se badal deta hai [mozilla.org]. Lekin yeh sirf sabse pehle wale word ko hi badlega [mozilla.org].
+• .replaceAll(): Yeh string me maujood saare ke saare us word ko naye word se badal deta hai [mozilla.org].
+• Live Practical:javascript
+let text = "Apple is good. I like Apple.";
+
+console.log(text.replace("Apple", "Mango"));    
+// Output: "Mango is good. I like Apple." (Sirf pehla badla)
+
+console.log(text.replaceAll("Apple", "Mango")); 
+// Output: "Mango is good. I like Mango." (Saare badal gaye)
+
+9)
+
+.startsWith(word) aur .endsWith(word) (Shuruat aur khatam check karna)
+
+• .startsWith(): Yeh check karta hai ki kya aapki string isi word se shuru ho rahi hai? (Deta hai true ya false) [mozilla.org].
+• .endsWith(): Yeh check karta hai ki kya aapki string isi word par khatam ho rahi hai? [mozilla.org].
+• Live Practical:javascript
+let url = "https://google.com";
+
+console.log(url.startsWith("https")); // Output: true (Secure website check karne ke liye)
+console.log(url.endsWith(".com"));    // Output: true
+
+10)
+
+.split(separator) (String ko todna - Array ka basic)
+
+• Yeh kya karta hai? Kyunki aap abhi Array nahi seekh rahe ho, toh iska bas basic samajh lo: Yeh kisi ek nishani (jaise space या comma) ko dekh kar string ko wahan se tod deta hai [mozilla.org].
+• Live Practical:javascript
+let names = "Rahul,Amit,Sumit";
+
+let broken = names.split(","); // Comma (,) se toda
+console.log(broken); // Output: ["Rahul", "Amit", "Sumit"] (Yeh array ban jata hai)
+
+11)
+
+.padStart(targetLength, padString) aur .padEnd()
+
+• Yeh kya karta hai? Yeh tab kaam aata hai jab aapko kisi string ki length ko fix karna ho aur bachi hui jagah me koi character (jaise 0 ya *) bharna ho. padStart aage bharta hai aur padEnd piche.
+• Live Practical:javascript
+let billNumber = "45";
+// Hame bill number ko 5 digits ka banana hai (aage 000 lagakar)
+console.log(billNumber.padStart(5, "0")); // Output: "00045"
+
+let maskPassword = "abc";
+// Piche stars lagakar length 6 karni hai
+console.log(maskPassword.padEnd(6, "*")); // Output: "abc***"
+
+12)
+
+.repeat(count)
+
+• Yeh kya karta hai? Kisi string ko baar-baar repeat karke ek nayi string bana deta hai.
+• Live Practical:javascript
+let emoji = "👋";
+console.log(emoji.repeat(3)); // Output: "👋👋👋"
+
+
+13)     .charCodeAt(index) aur .codePointAt(index)
+
+• Yeh kya karta hai? Aap jo bhi index (number) doge, yeh batayega ki us akshar ka computer ke andar Unicode number (ASCII Code) kya hai. codePointAt modern hai kyunki yeh Emojis ke code bhi nikal leta hai.
+• Live Practical:javascript
+let text = "ABC";
+console.log(text.charCodeAt(0)); // Output: 65 (Kyunki capital 'A' ka code 65 hota hai)
+
+let emojiText = "👋";
+console.log(emojiText.codePointAt(0)); // Output: 128075 (Emoji ka unique code
+
+14)
+
+
+.search(regexp)
+
+• Yeh kya karta hai? Yeh bilkul indexOf() ki tarah position (index) dhoondta hai, lekin iska power yeh hai ki isme aap Regular Expressions (Regex / Patterns) ka use karke advanced searching kar sakte ho.
+• Live Practical:javascript
+let message = "Total price is 500 dollars";
+// Hame dhoondna hai ki number (digit) kahan se shuru ho raha hai
+console.log(message.search(/[0-9]/)); // Output: 15 (Kyunki '5' 15th index par

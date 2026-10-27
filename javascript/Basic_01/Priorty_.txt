@@ -30,7 +30,7 @@ class mai es hota hai ke apne function ko call karo ge like class ka constructor
  agar bhar ka function call kiya dirct class mai tab fat jaye ge calss becuse ous time class ban rahi hoti hai
   .. but class ka object jab banta hai tab koi propty nhi hoti class ke var function ke becuse sub ek propity 
   hoti hai class ke jo same name ka hai do hai ex function and var same hai to ko last mai hoga vo pehele mel
-jea ga obejct ko: ex
+jea ga obejct ko: conculcion is that class ke under koi proprty nhi hoti  ex
 
 
 class MyClass {
@@ -72,10 +72,6 @@ class Foo {
 
 const outerObj = new Foo(); // ➔ Output: "Outer Foo chala!"
 outerObj.test();            // ➔ Output: "Inner Foo chala!"
-
-
-Q16. Notepad mein copy kaise karein?
--> Mouse se text select karo, Ctrl+C se copy karo, Notepad khol kar Ctrl+V se paste karo.
 
 Q17. Class se zyada izzat function ko milti hai?
 -> Haan! Compile time par function (Rank 2) pehle memory leta hai, class (Rank 3) baad mein. Function bina declare hue bhi chal jata hai, par class banti nahi toh crash ho jati hai.
