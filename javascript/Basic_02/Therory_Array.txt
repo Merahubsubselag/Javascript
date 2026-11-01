@@ -1,0 +1,582 @@
+ --------------------- Array ,types of array, how to access array----------
+
+what is Array
+
+ :-- >
+An Array is a special object used to store multiple values in a single variable. 
+ It is zero-indexed, meaning the first element is at index 0, and it can dynamically resize.
+  Unlike other languages, JavaScript arrays are heterogeneous,
+   which means they can store a mix of different data types like 
+   strings, numbers, and even objects at the same time."
+
+
+
+Array.prototype.at()// ek standard tarika (notation) hai aapko ye batane ka ki:
+// "Bhaiya, ye method ek instance method hai. Ise use karne ke liye pehle aapko ek array instance banana padega."
+
+
+  ---- JavaScript mein logically arrays ko hum 4 types mein divide karte hain:
+
+  Structure (Dimensions) ke hisab se Types
+
+  1) Single-Dimensional Array (Simple Array)
+
+  // Ek single row mein saara data hai
+const products = ['Laptop', 'Mobile', 'Watch'];
+
+// Access kaise karte hain:
+console.log(products[0]); // Output: Laptop
+
+2. Multi-Dimensional Array (Array ke andar Array) or 2d
+
+Jab aap ek array ke andar doosra array daal dete ho, toh use Multi-Dimensional array kehte hain.
+ Production mein iska use Tables, Grid,ya Coordinates (X, Y axis) ka data store karne ke
+  liye hota hai.
+
+  // // Har ek sub-array ek user ka raw data represent kar raha hai: [Name, Role, Status]
+const userTableData = [
+    ['Amit', 'Developer', 'Active'],  // Row 0
+    ['Rahul', 'Designer', 'Inactive'], // Row 1
+    ['Sneha', 'Manager', 'Active']     // Row 2
+];
+
+// Mujhe Sirf Rahul ka Role chahiye (Row 1, Column 1)
+console.log(userTableData[1][1]); // Output: Developer (Wait, Rahul is Designer, Row 1, Col 1 is 'Designer')
+
+3) 
+
+
+ Dense vs. Sparse Array (Memory ke hisab se)
+
+Interview mein ye depth check karne ke liye pucha jata hai.
+• Dense Array: Jismein saare elements lagatar (continuous) index par hon, 
+koi bhi slot khali na ho. Ye bohot fast hota hai.
+• Sparse Array: Jismein beech mein khali jagah (gaps) ho.
+
+Behavior aur Memory (Stray/Slots) ke hisab se Types
+Dense
+Sparse
+
+Feature	Dense Array 🟢	                       Sparse Array 🔴
+Holes (Khali jagah)	Ek bhi hole nahi hota.	    Beech mein empty slots hote hain.
+Memory & Performance	Fast hota hai kyunki 
+JavaScript ise continuous memory mein 
+store karta hai.                               	Slow hota hai kyunki browser ko missing values check karni padti hain.
+Example	[1, 2, 3, 4]	                           [1, , , 4] (beech ke do slots khali hain)
+
+
+
+
+Note: Production mein Sparse Array avoid karna chahiye kyunki ye performance slow kar deta hai.
+
+
+. TypedArrays (Advance: Binary Data ke liye)
+
+• Typed Arrays: Yeh special arrays hote hain jo sirf ek specific tarah ke numbers (jaise sirf integers ya floating numbers) ko store karne ke liye bane hain. Yeh bohot fast hote hain aur heavy graphics (WebGL) ya binary data par kaam karne ke liye use hote hain. Iske examples hain:
+	• Int8Array, Uint8Array
+	• Int32Array, Float64Array, wagera.
+
+
+cover in non primitve 
+
+Array of Objects
+arrya of array or 2d arrya
+
+• Objects (Array of Objects): [{ name: "Amit" }, { name: "Priya" }]
+• Dusra Array (Nested / Multi-dimensional Array): [[1, 2], [3, 4]] :- (jise log 2D array bolte hain)
+
+Mixed Array (Sab kuch ek sath):
+:const mixedArr = [42, "Hello", true, { role: "admin" }, [1, 2]];
+
+acces kese kare value:
+
+Nested Array (Array ke andar Array / Matrix) Ko Access Karna
+Jab array ke andar array hota hai, toh aapko do baar square brackets [][] lagane padte hain.
+ Pehla bracket outer array ke index ke liye, aur dusra andar wale inner array ke index ke liye
+
+ const matrix = [,       // Index 0,       // Index 1
+  [70, 80, 90]        // Index 2
+];
+
+// Row 1 (Index 1) ka dusra element (Index 1) nikalna hai (iska output '50' hoga):
+console.log(matrix[1][1]); // Output: 50
+
+// Pure andar wale array ko access karna ho:
+console.log(matrix[0]);    // Output: [10, 20, 30]
+
+
+. Array of Objects Ko Access Karna
+
+Jab array ke andar objects hote hain, toh pehle aapko square bracket [index] 
+se object tak pahunchna hota hai, aur phir dot
+ . (dot notation) ya bracket ['key'] se object ke andar ki property nikalni hoti hai:
+
+ const users = [
+  { id: 1, name: "Rahul", skills: ["JS", "React"] }, // Index 0
+  { id: 2, name: "Amit", skills: ["Python", "Node"] }   // Index 1
+];
+
+// Pehle user ka naam nikalna hai:
+console.log(users[0].name); // Output: "Rahul"
+
+// Dusre user ki skills (jo khud ek array hai) ka pehla skill nikalna hai:
+console.log(users[1].skills[0]); // Output: "Python"
+
+
+Yaad Rakhne Ka Golden Rule:
+
+• Jab tak square bracket [] chal raha hai, aap index (number) de rahe ho.
+• Jaise hi dot . lagaya ya string key di ['name'], aap object ki property access kar rahe ho.
+• Agar kuch samajh na aaye, toh bich mein console.log() lagakar ek-ek step check kar lo ki us step par kya mil raha hai!
+
+
+
+Summary Checklist for Interview
+
+1. Single-Dimensional: Ek sidhi list ([1, 2, 3]).
+2. Multi-Dimensional: Matrix ya Grid ([[1,2], [3,4]]).
+3. Dense: No gaps in memory.
+4. Sparse: Has empty slots/gaps.
+
+
+
+----------------------------  Differnt way to create array--------
+
+
+new Array() Constructor [ES1 - 1997]: 
+• Object-oriented tareeqa jo ek number dene par us size ka khali array (holes ke sath)
+ banata hai, aur multiple values dene par unka array banata hai.
+
+ Array Literal ([]) [ES1 - 1997]:
+
+• Sabse standard, clean aur fast tareeqa jisme square brackets ke 
+andar directly values daal kar array banaya jata hai.
+
+Array.of() [ES6 - 2015]: Bina kisi confusion ke, un saare numbers 
+aur values ka hi ek array bana dena jo aapne brackets ke andar pass kiye hain.
+
+
+Array.from() [ES6 - 2015]:
+ Kisi string, Set, ya HTML elements (array-like data)
+ ko convert karke ya custom default values ke sath naya array banane ke liye.
+
+Spread Operator ([...]) [ES6 - 2015]: Purane arrays ya iterables ko kholkar,
+ unhe aapas mein jodte hue ya copy karke naya array banane ke liye
+
+
+***********************  my use ***************
+Array Literal []
+Spread operator (...) 
+Array.from()
+
+
+
+
+************************ access array **********
+
+1) Bracket Notation ([index]) [ES1 - 1997]:
+
+Sabse standard aur basic tareeqa,
+ jahan square bracket mein 0, 1, 2 jaise number index daal kar value nikali jaati hai.
+console.log(arr[0]); // Index 0 ki value nikalega.
+
+
+2) Array Destructuring ([a, b]) [ES6 - 2015]: Array ke shuruati elements ko nikal
+ kar directly alag-alag variables mein ek sath store karne ke liye.
+
+const [first, second] = arr; // first me index 0 aur second me index 1 aa jayega.
+
+3) Optional Chaining (?.[]) [ES2020]: Agar array khud null ya undefined ho sake,
+ toh bina code crash kiye safely element access karne ke liye.
+
+console.log(arr?.[0]); // Agar arr nahi hua, toh error nahi dega, 
+undefined dega.
+
+4)
+Array.prototype.at() Method [ES2022]: Negative index (-1, -2) ka use karke array ke aakhri (last)
+ elements ko aasaani se access karne ke liye.
+
+console.log(arr.at(-1)); // Array ka sabse aakhri element nikal dega.
+
+5)
+Loops (for...of, forEach) [ES1 / ES5]:
+ Array ke saare elements ko ek-ek karke baari-baari access ya print karne ke liye.
+
+for (let item of arr) { console.log(item); }
+ // Saare elements ek-ek karke dikhaega.
+
+************* my use********
+Bracket Notation (arr[0])
+  Destructuring array or last value access (arr[arr.length - 1] ==>  old ==< new arr.at(-1))
+Agar aapko aakhri element chahiye, toh purana lambi line wala code (arr[arr.length - 1]) 
+likhne ki jagah naya arr.at(-1) use karein—yeh production mein sabse best aur clean mana jata hai.
+
+Access Every items
+
+const birds = ["Parrot", "Falcon", "Owl"];
+
+for (const bird of birds) {
+  console.log(bird);
+}
+
+
+you will want to do the same thing to each item in an array
+
+ leaving you with an array containing the changed items. You can do this using map().
+
+function double(number) {
+  return number * 2;
+}
+const numbers = [5, 2, 7, 6];
+const doubled = numbers.map(double);
+console.log(doubled); // [ 10, 4, 14, 12 ]
+
+
+sometimes you'll want to create a new array containing 
+only the items in the original array that match some test. You can do that using filter().
+
+function isLong(city) {
+  return city.length > 8;
+}
+const cities = ["London", "Liverpool", "Totnes", "Edinburgh"];
+const longer = cities.filter(isLong);
+console.log(longer); // [ "Liverpool", "Edinburgh" ]
+
+---------------------- JavaScript array-copy operations create shallow copies. -----
+
+shallow copies means dircted imfcetd on orignal refernce that called heap.
+
+Copy an array:
+This example shows three ways to create a new array from the existing fruits array: 
+first by using spread syntax,
+ hen by using the from() method,
+and then by using the slice() method.
+
+const fruits = ["Strawberry", "Mango"];
+
+// Create a copy using spread syntax.
+const fruitsCopy = [...fruits];
+
+// Create a copy using the from() method. and its is implesed method.
+
+const fruitsCopy2 = Array.from(fruits);
+
+
+// Create a copy using the slice() method.  and its is explicted  method.
+const fruitsCopy3 = fruits.slice();
+
+
+
+
+
+---------------------- JavaScript array-copy operations Deep copies. ---------
+
+
+One way to make a deep copy of a JavaScript object, if it can be serialized, is to use JSON.stringify() 
+to convert the object to a JSON string, and then JSON.parse() 
+to convert the string back into a (completely new) JavaScript object:
+
+const ingredientsList = ["noodles", { list: ["eggs", "flour", "water"] }];
+const ingredientsListDeepCopy = JSON.parse(JSON.stringify(ingredientsList));
+
+Because a deep copy shares no references with its source object,
+ any changes made to the deep copy do not affect the source object.
+
+ // Change the value of the 'list' property in ingredientsListDeepCopy.
+ingredientsListDeepCopy[1].list = ["rice flour", "water"];
+// The 'list' property does not change in ingredients_list.
+console.log(ingredientsList[1].list);
+// Array(3) [ "eggs", "flour", "water" ]
+
+Another way and best or Advance for deep copy Array:
+
+using Window: structuredClone() method
+
+// Ek original object banaya
+let user1 = {
+    name: "Rahul",
+    age: 25,
+    skills: ["JavaScript", "React"] // Iske andar ek array (list) bhi hai
+};
+
+// structuredClone se ekdam alag new copy banayi
+let user2 = structuredClone(user1);
+
+// Ab agar hum user2 mai changes karenge
+user2.name = "Amit";
+user2.skills.push("Node.js");
+
+// Output check karte hain:
+console.log(user1.name);   // Output: "Rahul" (Original safe hai)
+console.log(user2.name);   // Output: "Amit"
+
+console.log(user1.skills); // Output: ["JavaScript", "React"] (Ye array bhi safe raha)
+console.log(user2.skills); // Output: ["JavaScript", "React", "Node.js"]
+
+Feature:
+Date:• ew Date() hai, to ye use string nahi banata, balki ek naya actual Date object hi banata hai.
+Map/set:• Map aur Set collections ko ye poora data ke sath andar tak copy karta hai.
+RegExp :• (Regular Expressions): Agar aapke data me validation ke liye regex patterns hain, to unhe bhi sahi se clone karta hai.
+Error (): Objects: TypeError, ReferenceError jaise errors ko bhi copy kar sakta hai.
+
+Circular References ko Handle karna
+:
+let obj = { name: "Rahul" };
+obj.myself = obj; // Circular reference (Object ke andar khud wahi object)
+
+// JSON.stringify yahan crash ho jayega, par structuredClone aaram se handle kar lega:
+let safeCopy = structuredClone(obj); 
+
+ Transferable Objects (Memory aur Speed ka Fayda):
+ structuredClone() me aap data ko bina copy kiye, 
+ seedhe uska malikana hak (ownership) transfer kar sakte ho.
+
+ Typed Arrays aur Binary Data
+
+• Int8Array, Uint8Array, Float64Array vagera.
+• ArrayBuffer aur Blob (jo files ya images handling me use hote hain).
+
+Multi-Layer (Deep) Cloning:
+hahe aapka object 10 layer andar tak nested kyu na ho 
+(object ke andar array, uske andar ek aur object, uske andar fir se array),
+
+-------------------conculsion of This---------------
+Functions aur DOM elements ko chhodkar baki sub copy karta hai.
+
+old way ---
+
+let user1 = {
+    name: "Rahul",
+    skills: ["React", "Node"]
+};
+
+// Purana deep copy karne ka tarika
+let user2 = JSON.parse(JSON.stringify(user1));
+
+user2.skills.push("Python");
+
+console.log(user1.skills); // Output: ["React", "Node"] (Original safe hai)
+console.log(user2.skills); // Output: ["React", "Node", "Python"]
+
+
+
+
+---- Array Method---
+
+• Static Method: -> Seedhe capital Array par call hota hai. example Array.isArray()
+• Instance Method: -> Aapke banaye huye variable (object) par call hota hai. myArr.push()
+
+static method syntx: Array.method Name()
+1) Array.isArray(value):Yeh check karta hai ki jo value aapne pass ki hai, woh sach me ek Array hai ya nahi.
+example:
+console.log(Array.isArray([1, 2, 3])); // true
+console.log(Array.isArray("Rahul"));   // false
+console.log(Array.isArray({name: "AJ"})); // false
+
+2)
+Array.from(iterable, mapFunction):Kisi bhi array-like object (jaise String, Set, Map, ya HTML NodeList) 
+ko proper array me badal deta hai.
+need kue padi
+somtime hame array ke features chaye hote hai es ingredientsListDeepCopy
+string array ke tera hoti hai becu eske pass index and Properties hoti hai but function array wale nhi melte es leye use karte hai
+
+example
+
+let str = "HELLO";
+let asliArray = Array.from(str); // ['H', 'E', 'L', 'L', 'O']
+
+// Ab yeh asli array ban chuka hai, toh reverse bhi kaam karega!
+asliArray.reverse(); 
+console.log(asliArray); // Output: ['O', 'L', 'L', 'E', 'H']
+
+or 
+
+let duplicateArr =;
+
+// Step 1: Set banaya (Yeh automatic duplicates hata dega)
+let mySet = new Set(duplicateArr); 
+console.log(mySet); // Output: Set(5) { 1, 2, 3, 4, 5 } (Lekin yeh Set hai, array nahi)
+
+// Step 2: Set ko wapas asli Array me badla
+let uniqueArr = Array.from(mySet);
+console.log(uniqueArr); // Output: [1, 2, 3, 4, 5] (Asli Array mil gaya!)
+
+
+or
+
+let myMap = new Map();
+myMap.set("name", "Rahul");
+myMap.set("age", 25);
+
+// 1. Poore Map ko array banana
+let fullArr = Array.from(myMap);
+console.log(fullArr); 
+// Output: [ ["name", "Rahul"], ["age", 25] ] (2D Array ban gaya)
+
+// 2. Sirf Values ko array banana (Using mapFunction shortcut)
+let valuesArr = Array.from(myMap, ([key, value]) => value);
+console.log(valuesArr); // Output: ["Rahul", 25]
+
+
+// 1. String se array banana
+let nameArr = Array.from("JS"); // ['J', 'S']
+
+// 2. Map function ke saath use (optional second argument)
+let doubled = Array.from([1, 2, 3], x => x * 2); // [2, 4, 6]
+
+3)
+Array.of(element1, element2, ...): jitne bhi arguments doge, unka ek naya array bana dega.
+
+need kue padi : new array v to karta tha yhe kam but probelm aayi jab single value pe 
+behfave differnet karta hai some time number mai 
+arr=[3]; yha es ne data ko index pe conevrt kar diya or 3 varible bna deye and data kcuh v nhi so es ke probelm solve ke leaving
+array of aaya
+
+rray.of(1) : yhe data save kare ga na ki index
+ 
+Array Static Properties:
+
+Array ke paas sirf ek hi main static property hoti hai:
+Array.prototype
+eh property pure Array constructor ka "blueprint" (dna) dikhati hai.
+
+Kyun use karein: Agar aap chahte hain ki aap apna koi custom method
+ banayein jo pure project ke har array me automatic mil jaye, toh aap iska use karte hain.
+
+ / Apna khud ka custom method banana
+Array.prototype.sayHello = function() {
+    return "Hello from this array!";
+};
+
+let myArr =;
+console.log(myArr.sayHello()); // "Hello from this array!"
+
+
+
+2)****************** Array Instance Properties (Sirf 1 main property hai)*******
+
+
+length: Yeh batata hai ki array ke andar total kitne elements (items) hain.
+let items = ['laptop', 'mobile', 'charger'];
+console.log(items.length); // Output: 3
+
+Fun Fact: Aap .length ko change karke array ko chota ya bada bhi kar sakte hain!
+
+
+******************** Array Instance Methods (Ghar ke Bhedi)*********************
+
+
+Group 1: End me badlav karne wale (Last Element)
+
+.push(element): Array ke aakhiri (end) me naya item jodta hai aur array ki nayi length return karta hai.
+let arr =;
+arr.push(3); 
+console.log(arr); // Output: [1, 2, 3]
+
+
+.pop(): Array ke aakhiri (end) item ko nikal (delete kar) deta hai aur jo item nikala hai,
+ wahi return karta hai.
+
+ let arr =;
+let removed = arr.pop();
+console.log(arr);     // Output: [1, 2]
+console.log(removed); // Output: 3
+
+
+
+Group 2: Shuruat me badlav karne wale (First Element)
+
+.unshift(element): Array ke ekdam shuru me (start) naya item jodta hai. (Push ka ulta)
+
+let arr =;
+arr.unshift(1);
+console.log(arr); // Output: [1, 2, 3]
+
+.shift(): Array ke pehle (first) item ko nikal deta hai. (Pop ka ulta)
+let arr =;
+let removed = arr.shift();
+console.log(arr);     // Output: [2, 3]
+console.log(removed); // Output: 1
+
+
+Group 3: Tukde karne wale aur Beech me se delete/add karne wale (splice vs slice)
+
+.slice(start, end): Yeh asli array ko touch nahi karta, bas usme se ek hissa kaat kar naya array de deta hai. 
+(End index include nahi hota).
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+let chunk = arr.slice(1, 4); // Index 1 se lekar 3 tak kaetga
+console.log(chunk); // Output: ['b', 'c', 'd']
+console.log(arr);   // Output: ['a', 'b', 'c', 'd', 'e'] (Asli array bilkul waisa hi hai)
+
+.splice(start, deleteCount, item1, item2...) (Beech me operation - Asli array badal jata hai)
+
+let arr = ['Apple', 'Banana', 'Mango'];
+// Index 1 par jao, 1 item delete karo (Banana), aur wahan 'Kiwi' daal do
+arr.splice(1, 1, 'Kiwi'); 
+console.log(arr); // Output: ['Apple', 'Kiwi', 'Mango'] (Asli array change ho gaya!)
+
+Group 4: Search Karne Wale Methods (Element Dhoondna)
+
+includes(element)=• eh bas itna check karta hai ki item array me hai ya nahi. Yeh true ya false return karta hai.
+let cars = ['Audi', 'BMW', 'Thar'];
+console.log(cars.includes('BMW'));  // Output: true
+console.log(cars.includes('Swift')); // Output: false
+
+
+.indexOf(element)
+
+• Yeh dhoondta hai ki item kaunse number (index) par baitha hai.
+ Agar item mil gaya, toh uska index return karega, aur agar nahi mila toh -1 return karega.
+
+ let cars = ['Audi', 'BMW', 'Thar'];
+console.log(cars.indexOf('Thar'));  // Output: 2
+console.log(cars.indexOf('Swift')); // Output: -1 (Nahi mila)
+
+
+.lastIndexOf(element)
+Kya karta hai: Agar ek hi item array me 2-3 baar aaya hai,
+ toh yeh aakhiri baar (last time) jahan aaya hai, uska index batata hai (Peeche se dhoondna shuru karta hai).
+
+ let numbers =;
+console.log(numbers.indexOf(1));     // Output: 0 (Pehla wala)
+console.log(numbers.lastIndexOf(1)); // Output: 4 (Aakhiri wala)
+
+Group 5: Array ko Jodne aur Utility Wale Methods
+
+concat(array2, array3, ...)
+Do ya do se zyada arrays ko aapas me jodkar ek naya array banata hai. Asli array safe rehte hain.
+
+let arr1 =;
+let arr2 =;
+let newArr = arr1.concat(arr2);
+console.log(newArr); // Output:
+
+.join(separator)
+
+• Array ke saare elements ko aapas me jodkar ek String bana deta hai.
+ Bracket me aap jo bhi separator (jaise space, comma, ya dash) doge, yeh unke beech me laga dega.
+
+let words = ['Rahul', 'is', 'coding'];
+console.log(words.join(" ")); // Output: "Rahul is coding" (String ban gayi)
+console.log(words.join("-")); // Output: "Rahul-is-coding"
+
+.reverse():Array ko poora ulta (reverse) kar deta hai. Dhyan rahe, yeh asli array ko badal deta hai!
+
+let list =;
+list.reverse();
+console.log(list); // Output:
+
+
+.with()
+  // kisi ek specific element ko badalna (update karna), par bina purane array ko kharab kiye (yaani safe copy banana).
+const users = ['Amit', 'Rahul', 'Sumit'];
+
+// Hame 'Rahul' (Index 1) ki jagah 'Rohit' karna hai
+const newUsers = users.with(1, 'Rohit');
+
+console.log(newUsers); // Output: ['Amit', 'Rohit', 'Sumit'] (Naya Array)
+console.log(users);    // Output: ['Amit', 'Rahul', 'Sumit'] (Original bilkul safe hai!)
+
+
+pending (Advanced loop methods jaise .map(), .filter(), .reduce())

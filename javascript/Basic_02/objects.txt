@@ -1,0 +1,70 @@
+// ==========================================
+// 1. STATIC METHODS (Object Keyword Wale)
+// ==========================================
+
+const student = { name: "Rahul", age: 20, city: "Delhi" };
+
+// A. Object.keys() - Saari keys nikalne ke liye
+const keysList = Object.keys(student);
+console.log("Static keys:", keysList); 
+// Output: ["name", "age", "city"]
+
+// B. Object.values() - Saari values nikalne ke liye
+const valuesList = Object.values(student);
+console.log("Static values:", valuesList); 
+// Output: ["Rahul", 20, "Delhi"]
+
+// C. Object.entries() - Key aur Value dono ka joda (pair) banane ke liye
+const entriesList = Object.entries(student);
+console.log("Static entries:", entriesList); 
+// Output: [ ["name", "Rahul"], ["age", 20], ["city", "Delhi"] ]
+
+// D. Object.assign() - Do objects ko aapas mein jodne ke liye
+const extraInfo = { course: "BTech" };
+const fullProfile = Object.assign({}, student, extraInfo);
+console.log("Static assign:", fullProfile); 
+// Output: { name: "Rahul", age: 20, city: "Delhi", course: "BTech" }
+
+// E. Object.seal() - Nayi key add karne se rokne ke liye (Purani change ho sakti hai)
+const sealedObj = { status: "Active" };
+Object.seal(sealedObj);
+sealedObj.status = "Pending"; // Chal jayega (Purani change ho sakti hai)
+sealedObj.id = 101;           // Nahi chalega (Nayi add nahi hogi)
+console.log("Static seal:", sealedObj); 
+// Output: { status: "Pending" }
+
+// F. Object.freeze() - Ekdam strict lock karne ke liye (Kuch change nahi hoga)
+const frozenObj = { role: "Admin" };
+Object.freeze(frozenObj);
+frozenObj.role = "User"; // Kuch asar nahi hoga (Lock hai)
+console.log("Static freeze:", frozenObj); 
+// Output: { role: "Admin" }
+
+
+// ==========================================
+// 2. INSTANCE METHODS & PROPERTIES (Direct Object Wale)
+// ==========================================
+
+const employee = { id: 7, name: "Amit" };
+
+// A. hasOwnProperty() - Check karta hai ki key object ke andar hai ya nahi
+const hasName = employee.hasOwnProperty("name");
+const hasAge = employee.hasOwnProperty("age");
+console.log("Instance hasOwnProperty (name):", hasName); // Output: true
+console.log("Instance hasOwnProperty (age):", hasAge);   // Output: false
+
+// B. toString() - Object ko text format mein badalne ke liye
+console.log("Instance toString:", employee.toString()); 
+// Output: "[object Object]"
+
+// C. valueOf() - Object ki asli raw value dekhne ke liye
+console.log("Instance valueOf:", employee.valueOf()); 
+// Output: { id: 7, name: "Amit" }
+
+// D. constructor - Batata hai ki is object ko kisne banaya (Main Object creator)
+console.log("Instance property (constructor):", employee.constructor === Object); 
+// Output: true
+
+// E. __proto__ - Batata hai ki yeh object kis dadi-nani (parent prototype) se connect hai
+console.log("Instance property (__proto__):", employee.__proto__); 
+// Output: [Object: null prototype] {} (JavaScript ka main blueprint)
