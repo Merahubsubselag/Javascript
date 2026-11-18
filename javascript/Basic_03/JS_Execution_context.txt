@@ -1,0 +1,122 @@
+Java script Execution context yhe ke container or block yha environment hota hai jo js engine js file ko execute krata hai 
+. ese bolte hai Execution context.
+                                            or
+js engine js code ko jab execute karta hai tab background mai Execution context ready karta hai                                        
+
+Environment: means esa environment jo code ko evalute and execute hota jo js file mai likha hota.
+
+
+Types of Execution context
+
+Global Execution context : - Only one time create block and its Mandtory.
+funcational Execution context :-  According to the Requriments or call functions in the global execution context.
+
+Phase of Execution context
+
+Phase 1: Creation Phase (Memory Allocation) or Memory Component (Variable Environment): Variables aur
+functions ko undefined ya unki values ke sath store kiya jata hai.
+
+Types of spaces:
+1)Global spaces: es mai sub kuch aaye ga jo function ke bhar hoga var,function defintions refernce, 
+var for ex like x=34 without name also save in window objects or agar function ke under
+v and predefined function v ese mai save hote hai.
+without name karo ge vo v window objecr mai jaake chip jaye ga.
+problem have in function with normal function becuse it will also override. In e6 also.
+noraml function copy as refernec.
+
+2)script spaces (browser hidden space):  beuse old e6 se pichle walo mai global wale data ko overide karta tha es leye 
+sciprt spaces base mai save karne lage. and eska kam he yhe hai.
+use memory: (let,const,class,function(arrow function,expression function,inner class function))
+Arrow/Expression Functions: copy as varibale.
+benifits:
+Temporal Dead Zone (TDZ),
+Window Object ko Clean Rakhna (No Global Pollution),
+Duplicate Block Karna.
+that why react use arrow funcyiona and all.
+
+For FEC:-
+Local spaces: yhe sub function ke under walo ke lea use hota hai like let const,and 
+var inka bheav different hota hai bcuse tem banti hai function over hone ke baad khatm
+Global spaces: es mai bus without name wala he globally save hota hai funcion ke under v.
+but yhe remove function ke band hone par remove nhi hota jab tak browser band na kare.
+
+Phase 2: Execution Phase or Code Component (Thread of Execution): Yahan code ek-ek karke line-by-line execute hota hai.
+
+example:
+
+var age = 25; 
+let colors = ["red", "blue"];
+const user = { name: "Raj" }; 
+
+function updateAge(newAge) {
+    let factor = 2;
+    var double = newAge * factor;
+    return double;
+}
+
+var result = updateAge(age);
+
+Execution phase
+
+var age = 25; 
+let colors = ["red", "blue"];
+const user = { name: "Raj" }; 
+
+function updateAge(newAge) {
+    let factor = 2;
+    var double = newAge * factor;
+    return double;
+}
+
+var result = updateAge(age);
+
+1. Global Execution Context (GEC)
+
+
+Phase 1: Memory Creation Phase (GEC)
+
+Jab code shuru hoga, toh JS engine memory allocate karega. Yahan par var aur let/const alag-alag tarike se behave karenge:
+• age (var): Yeh Global Space mai store hoga aur iski value undefined set hogi.
+• colors (let): Yeh ek special Script/Block Space mai store hoga. Isko memory toh milti hai, par yeh Uninitialized rehta hai (ispe access karne par Error aayega, isi ko Temporal Dead Zone kehte hain).
+• user (const): Yeh bhi Script Space mai store hoga aur Uninitialized rahega.
+• updateAge (function): Global space mai iska poora function body/code copy ho jayega.
+• result (var): Global space mai undefined set hoga.
+
+Phase 2: Code Execution Phase (GEC)
+
+Ab code line-by-line chalega aur values assign karega:
+• Line 1: age ki value undefined se badalkar 25 ho jayegi.
+• Line 2: Heap memory mai ek array ["red", "blue"] banega, aur uska reference (address) colors variable ko milega. Ab yeh Temporal Dead Zone se bahar aa gaya.
+• Line 3: Heap memory mai ek object { name: "Raj" } banega, aur uska reference user variable ko milega.
+• Line 5-9: Function body ko skip kar diya jayega.
+• Line 11: Jaise hi updateAge(age) call hua (jahan age ki value 25 paas ho rahi hai), JS engine GEC ko rokk kar ek naya Function Execution Context (FEC) banayega.
+
+2. Function Execution Context (FEC)
+
+
+Phase 1: Memory Creation Phase (FEC)
+
+Ab sirf function ke andar ke maal-masale ke liye local memory banegi:
+• newAge (Parameter): Isko local memory milega aur value undefined set hogi.
+• factor (let): Local space mai memory milegi par yeh Uninitialized rahega (Temporal Dead Zone mai).
+• double (var): Local space mai memory milegi aur value undefined set hogi.
+
+Phase 2: Code Execution Phase (FEC)
+
+Ab function ke andar ka code line-by-line chalega:
+• Sabse pehle argument transfer hoga: newAge ki value badalkar 25 ho jayegi.
+• Line 6: factor ko uski value 2 assign ho jayegi (ab yeh safe hai).
+• Line 7: newAge * factor (25 * 2 = 50) calculate hoga aur double variable mai 50 store ho jayega.
+• Line 8: return double; chalega, yaani yeh function 50 return karega.
+• Function End: Return hote hi yeh pura FEC (Function box) memory se delte/destroy ho jayega.
+
+3. Wapas GEC mai Return (Final Step)
+
+• Control wapas Global context ke Line 11 par aayega.
+• Function se jo 50 return hua tha, wo Global variable result mai assign ho jayega (uski value undefined se badalkar 50 ho jayegi).
+• Poora program khatam hote hi or GEC program khatam hone par nahi, balki browser tab band hone par destroy hota hai.
+
+
+
+
+

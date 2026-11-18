@@ -1,0 +1,47 @@
+
+Pillar 1: Jodna / Badalna (Accumulator & Transform)
+
+• College Connection: Factorial (res = res * i) & Sum of N Numbers (sum = sum + i).
+• Requirement mein kya shabd dikhenge: "Total nikalo", "Bill banao", "Har item ko update/format karo", "Sabko jod kar ek string banao".
+• Kaunsa Loop lagega: for-each ya for loop (kyunki poori list ke har item par jana hai, kuch chhodna nahi hai).
+• Andar ka Logic (Body): Bahar ek khaali variable (total = 0 ya list = []) rakho, andar har item ko usmein jodte jao (total += item.price).
+• Real Project Example (Swiggy Cart):
+	• Bahar: int grandTotal = 0;
+	• Loop: Cart ke saare items par.
+	• Andar: grandTotal = grandTotal + item.price + item.gst;
+
+Pillar 2: Chhantna / Rokna (Filter, Flag & Break)
+
+• College Connection: Prime Number Check (divide hote hi break) & Even/Odd (%).
+• Requirement mein kya shabd dikhenge: "Sirf wahi dikhao jo...", "Check karo sab sahi hai ya nahi", "Jaise hi mile ruk jao", "Har 5th item par...".
+• Kaunsa Loop lagega: while ya for with break (kyunki kaam poora hote hi beech mein rukna pad sakta hai).
+• Andar ka Logic (Body): if (condition) lagao. Agar dhundhna hai toh milte hi break karo; agar chhantna hai toh nayi list mein daalo; agar interval hai toh i % 5 == 0 lagao.
+• Real Project Example (Amazon Checkout Validation):
+	• Bahar: boolean canCheckout = true;
+	• Loop: Cart ke saare items par.
+	• Andar: if (item.stock == 0) { canCheckout = false; break; } (Ek bhi item out-of-stock mila toh wahin ruk jao aur error dikhao).
+
+Pillar 3: Ginna / Group Karna (Counter & Frequency)
+
+• College Connection: String mein har letter ki ginti ("hello" mein 'l' kitni baar aaya).
+• Requirement mein kya shabd dikhenge: "Kitne hain?", "Category wise alag karo", "Dashboard summary banao", "Duplicate kitne hain?".
+• Kaunsa Loop lagega: for-each loop (poora data ek baar scan karne ke liye).
+• Andar ka Logic (Body): Ek Map/Object banao aur har item ki category ke aage +1 karte jao (count[status]++).
+• Real Project Example (Admin Dashboard):
+	• Bahar: deliveredCount = 0, pendingCount = 0;
+	• Loop: Aaj ke 500 orders par.
+	• Andar: if (order.status == "Delivered") deliveredCount++; else pendingCount++;
+
+Pillar 4: Andar Jaana / Compare Karna (Nested & Previous-Current)
+
+• College Connection: Star Pattern Printing (Row/Col) & Fibonacci Series (a + b = c).
+• Requirement mein kya shabd dikhenge: "Har ek ke andar ke items", "Pichle wale se compare karo", "Duplicate hatao", "Ulta dikhao".
+• Kaunsa Loop lagega:
+	• Data ke andar data ho → Nested for loop (Outer + Inner).
+	• Pichle item se compare karna ho → Index for loop (i = 1 se start, taaki arr[i - 1] mil sake).
+• Real Project Example 1 (Nested — Customer Invoice):
+	• Outer Loop: Customer ke Orders uthao (jaise Star Pattern ki Row).
+	• Inner Loop: Us ek Order ke andar ke Products print karo (jaise Star Pattern ke Stars).
+• Real Project Example 2 (Fibonacci Logic — Stock Price / Duplicate Remove):
+	• Loop: i = 1 se end tak.
+	• Andar: if (arr[i] == arr[i - 1]) → Matlab aaj ka item pichle item jaisa hi hai, isko skip karo!

@@ -1,0 +1,48 @@
+• Array: Ek simple list jismein items sequence (index 0, 1, 2...) mein rehte hain.
+• Set: Ek unique list jismein duplicate values nahi aa saktin.
+• Object: Data ko key: value mein rakhne ka sabse common tarika (simple data ke liye).
+• Map: Object ka advanced version jo kisi bhi data type ko key bana sakta hai.
+
+
+====================================================================================================
+Feature            | Array              | Set                | Object             | Map
+====================================================================================================
+Data Format        | Values ([1, 2])    | Unique Values      | Key: Value         | Key => Value
+Duplicate Allowed? | Haan (Repeat ok)   | Nahi (Sirf unique) | Key Nahi, Val Haan | Key Nahi, Val Haan
+Key ka Type        | Index (0, 1, 2)    | Koi key nahi       | Sirf String/Symbol | Kuch bhi (Num/Obj)
+Order (Sequence)   | Fixed rehta hai    | Fixed rehta hai    | Fixed nahi rehta   | Fixed rehta hai
+Size Check Karna   | arr.length         | set.size           | Object.keys().len  | map.size
+====================================================================================================
+
+
+
+
+
+Array ([])
+
+• Kya kar sakta hai: Index (arr[0]) se item nikalna, .map(), .filter(), .sort() jaise powerful methods chalana, aur JSON mein convert hona.
+• Kya nahi kar sakta: Apne aap duplicate items nahi rok sakta, aur bade data mein search (.includes()) slow karta hai.
+
+2. Set (new Set())
+
+• Kya kar sakta hai: Duplicate values ko automatically hatana aur bahut fast search (.has()) karna.
+• Kya nahi kar sakta: Index (set[0]) se value nahi deta, key-value pair nahi banata, aur direct .map() ya .filter() nahi chalata.
+
+3. Object ({})
+
+• Kya kar sakta hai: Simple user/product data store karna aur backend APIs ke liye seedha JSON mein convert hona.
+• Kya nahi kar sakta: Kisi number ya dusre object ko key nahi bana sakta (sabko string bana deta hai), aur direct for...of loop nahi chalata.
+
+4. Map (new Map())
+
+• Kya kar sakta hai: Kisi object ya number ko seedha key banana, data ka sequence maintain rakhna, aur fast add/delete karna.
+• Kya nahi kar sakta: Index (map[0]) se access nahi hota, aur seedha JSON mein convert nahi hota.
+
+
+
+ Kab Kya Use Karein? (Cheat Sheet)
+
+• List + .map() / .filter() chahiye ➔ Array
+• Sirf Unique values + Fast check chahiye ➔ Set
+• Simple data + API / JSON bhejna hai ➔ Object
+• Complex Keys (Object/Number) + Fast update chahiye ➔ Map
