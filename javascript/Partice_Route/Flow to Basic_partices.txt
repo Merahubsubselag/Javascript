@@ -1,0 +1,68 @@
+================================================================
+PLAN 1: BASIC JAVASCRIPT ROADMAP (COMPLETE FOUNDATION)
+(Goal: Logic banana aur working code likhna seekhna)
+================================================================
+
+MODULE 1: SETUP & VARIABLES
+----------------------------------------------------------------
+[ ] 1. Chrome DevTools Console & VS Code Setup
+[ ] 2. console.log(), console.warn(), console.error(), console.table()
+[ ] 3. Variables: let, const (aur var ka basic intro)
+[ ] 4. Comments (Single-line // aur Multi-line /* */)
+
+MODULE 2: ALL DATA TYPES & TYPE CONVERSION
+----------------------------------------------------------------
+[ ] 1. Primitive Data Types (Total 7):
+       - String, Number, Boolean, undefined, null, BigInt, Symbol
+[ ] 2. Non-Primitive / Reference Data Type (Total 1):
+       - Object (Iske andar Plain Objects {}, Arrays [], Functions aate hain)
+[ ] 3. typeof Operator & Type Checking (Array.isArray(), Number.isNaN())
+[ ] 4. Type Conversion (Explicit: Number(), String(), Boolean())
+[ ] 5. Type Coercion (Implicit: JS khud type kaise badalta hai)
+
+MODULE 3: OPERATORS & CONTROL FLOW
+----------------------------------------------------------------
+[ ] 1. Arithmetic Operators (+, -, *, /, %, **)
+[ ] 2. Assignment Operators (=, +=, -=, *=, /=)
+[ ] 3. Comparison Operators (===, !==, >, <, >=, <= vs ==, !=)
+[ ] 4. Logical Operators (&&, ||, !) & Nullish Coalescing (??)
+[ ] 5. Optional Chaining (?.)
+[ ] 6. Conditionals: if, else if, else, switch-case, Ternary (? :)
+
+MODULE 4: LOOPS & ITERATIONS
+----------------------------------------------------------------
+[ ] 1. for loop
+[ ] 2. while loop & do...while loop
+[ ] 3. break & continue keywords
+[ ] 4. Modern Loops: for...of (Arrays/Strings ke liye) & for...in (Objects ke liye)
+
+MODULE 5: FUNCTIONS (BASICS)
+----------------------------------------------------------------
+[ ] 1. Function Declaration vs Function Expression
+[ ] 2. Parameters, Arguments, & Default Parameters
+[ ] 3. return statement
+[ ] 4. Arrow Functions (() => {}) ka basic syntax
+[ ] 5. Callback Functions (Ek function ko doosre mein pass karna)
+
+MODULE 6: STRINGS, ARRAYS & OBJECTS (EVERYDAY WORK)
+----------------------------------------------------------------
+[ ] 1. String Methods: slice(), split(), trim(), replace(), includes(), toUpperCase()
+[ ] 2. Template Literals (`Hello ${name}`)
+[ ] 3. Array Basics & Methods: push(), pop(), shift(), unshift(), splice(), slice()
+[ ] 4. Array Iteration Methods: forEach(), map(), filter(), reduce(), find(), some(), every()
+[ ] 5. Object Basics: Dot vs Bracket notation, Adding/Deleting properties
+[ ] 6. Object Methods: Object.keys(), Object.values(), Object.entries()
+[ ] 7. Destructuring (Array & Object) & Spread/Rest Operator (...)
+
+MODULE 8: BASIC DOM & EVENTS (WEB PAGE INTERACTION)
+----------------------------------------------------------------
+[ ] 1. Selecting Elements: querySelector(), querySelectorAll(), getElementById()
+[ ] 2. Changing Content & Style: textContent, innerHTML, classList.add/remove
+[ ] 3. Event Listeners: addEventListener('click', 'input', 'submit')
+[ ] 4. Browser Storage Basics: localStorage & sessionStorage (setItem, getItem)
+[ ] 5. JSON: JSON.stringify() & JSON.parse()
+
+--> BASIC PLAN MILESTONE:
+    Iske baad aap ek working Todo App, Calculator, ya Weather App 
+    khud bana sakte hain.
+================================================================

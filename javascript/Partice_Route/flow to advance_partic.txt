@@ -1,0 +1,61 @@
+================================================================
+PLAN 2: ADVANCED JAVASCRIPT ROADMAP (DEEP ENGINE & PRO LEVEL)
+(Goal: Memory, Speed, Internals, aur Complex Architecture samajhna)
+================================================================
+
+MODULE 1: JS ENGINE & EXECUTION INTERNALS
+----------------------------------------------------------------
+[ ] 1. V8 Engine Architecture (Parser, AST, Ignition Interpreter, TurboFan Compiler)
+[ ] 2. Execution Context (Global vs Function Execution Context)
+[ ] 3. Two Phases: Memory Creation Phase vs Code Execution Phase
+[ ] 4. Call Stack & Stack Overflow (RangeError)
+[ ] 5. Hoisting (var, let, const, Function Declarations vs Expressions)
+[ ] 6. Temporal Dead Zone (TDZ)
+
+MODULE 2: SCOPE, CLOSURES & 'THIS' KEYWORD
+----------------------------------------------------------------
+[ ] 1. Lexical Environment & Scope Chain
+[ ] 2. Block Scope vs Function Scope vs Global Scope
+[ ] 3. Closures (Deep dive: Memory mein variables kaise zinda rehte hain)
+[ ] 4. Closure Applications: Data Encapsulation, Module Pattern, Memoization, Currying
+[ ] 5. 'this' Keyword Rules (Default, Implicit, Explicit, New binding, Arrow functions)
+[ ] 6. Explicit Binding: call(), apply(), aur bind() (aur inke Polyfills)
+
+MODULE 3: MEMORY MANAGEMENT & ADVANCED DATA STRUCTURES
+----------------------------------------------------------------
+[ ] 1. Stack Memory vs Heap Memory (Primitives vs Reference pointers)
+[ ] 2. Shallow Copy vs Deep Copy (structuredClone aur custom deep clone logic)
+[ ] 3. Garbage Collection (Mark-and-Sweep Algorithm) & Memory Leaks pakadna
+[ ] 4. Map & Set (Hash tables, O(1) fast lookup, unique values)
+[ ] 5. WeakMap & WeakSet (Weak references & Automatic Garbage Collection)
+[ ] 6. Symbols & Iterators / Generators (function* aur yield)
+
+MODULE 4: ASYNCHRONOUS JAVASCRIPT & EVENT LOOP
+----------------------------------------------------------------
+[ ] 1. Concurrency Model & Event Loop (Call Stack, Web APIs, Task Queue)
+[ ] 2. Microtask Queue vs Macrotask (Callback) Queue (Priority order)
+[ ] 3. Timers Deep Dive: setTimeout, setInterval, requestAnimationFrame
+[ ] 4. Promises Internals (States: Pending, Fulfilled, Rejected)
+[ ] 5. Promise Combinators: Promise.all(), Promise.allSettled(), Promise.race(), Promise.any()
+[ ] 6. Async / Await & Error Handling (try...catch...finally, Custom Errors)
+[ ] 7. Fetch API Advanced: AbortController (Request cancel karna), Headers, CORS
+
+MODULE 5: PROTOTYPES, OOP & FUNCTIONAL PROGRAMMING
+----------------------------------------------------------------
+[ ] 1. Prototypes & Prototypal Inheritance (__proto__ vs prototype property)
+[ ] 2. Constructor Functions & 'new' keyword ke piche ka kaam
+[ ] 3. ES6 Classes, Inheritance (extends, super), Static methods, Private fields (#)
+[ ] 4. Property Descriptors: Object.defineProperty (writable, enumerable, configurable)
+[ ] 5. Object Freezing: Object.freeze() vs Object.seal()
+[ ] 6. Functional Programming: Pure Functions, Immutability, Composition
+
+MODULE 6: PERFORMANCE OPTIMIZATION & BROWSER INTERNALS
+----------------------------------------------------------------
+[ ] 1. Debouncing & Throttling (Scratch se implement karna)
+[ ] 2. Event Propagation: Event Bubbling, Capturing, stopPropagation, preventDefault
+[ ] 3. Event Delegation (Memory bachane ke liye parent par listener lagana)
+[ ] 4. Polyfills Likhnna: myMap, myFilter, myReduce, myBind, myPromiseAll
+[ ] 5. Strict Mode ("use strict") & ES Modules (import / export, Dynamic imports)
+[ ] 6. Web Workers (Heavy calculation ko background thread par chalana)
+[ ] 7. Security Basics: XSS (Cross-Site Scripting) aur CSRF se bachav
+================================================================
